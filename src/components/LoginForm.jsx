@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LOGIN_SCHEMA } from '../helpers/validationSchemas'
-// import { axiosInstance } from '../config/axiosInstance'
+import {axiosInstance} from '../config/axiosInstance'
 import { toast } from 'sonner'
 
 
@@ -24,7 +24,7 @@ const LoginForm = ({setIsLogged}) => {
             setLoading(true);
             const response = await axiosInstance.post("/login", data)
             localStorage.setItem("token", response.data.token);
-            navigate("/books");
+            navigate("/main");
             toast.success("Bienvenido!",{position:"top-right"});
             setIsLogged(true)
         } catch (error) {
