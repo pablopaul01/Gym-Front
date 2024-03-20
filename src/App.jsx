@@ -1,47 +1,39 @@
 import { useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
-import Home from './pages/Home'
-import UserInterface from './pages/UserInterface'
-import PrivateRoutesUser from './Routes/PrivateRoutesUser'
-import PrivateRoutesAdmin from './Routes/PrivateRoutesAdmin'
-import LoginPage from './pages/LoginPage'
-import CrudSongs from './pages/CrudSongs'
-import CrudUsers from './pages/CrudUsers'
-import NavMenu from './components/navMenu/NavMenu'
-import ForgotPass from './pages/ForgotPass'
+import Books from './pages/Books'
+import { Route, Routes } from 'react-router-dom'
+import { Toaster } from 'sonner'
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Favorites from './pages/Favorites'
+import RecoverPass from './pages/RecoverPass'
 import ResetPass from './pages/ResetPass'
-import CrudCategory from './pages/CrudCategory'
-import Footer from './pages/Footer'
-
-
+import Footer from './components/Footer'
+import Error from './pages/Error'
 
 function App() {
   const [isLogged, setIsLogged] = useState(()=>{
     return !!localStorage.getItem('token') || false
   })
 
-  const location = useLocation();
-  const hideFooter = location.pathname.startsWith('/audioPlayer/');
+  const isAuthenticated = !!localStorage.getItem('token');
 
   return (
     <>
-      <NavMenu isLogged={isLogged} setIsLogged={setIsLogged} />
+    <Navbar isLogged={isLogged} setIsLogged={setIsLogged}/>
+    <Toaster richColors/>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path='/login' element={<LoginPage setIsLogged={setIsLogged}/>} />
-        <Route path="/forgot-pass" element={<ForgotPass />} />
-        <Route path="/reset_password/:id/:token" element={<ResetPass />}></Route>
-        
-      <Route element={<PrivateRoutesUser />}>
-        <Route path="/audioPlayer/:id" element={<UserInterface />} />
-      </Route>
-      <Route element={<PrivateRoutesAdmin />}>
-        <Route path='/songs' element={<CrudSongs />} />
-        <Route path='/users' element={<CrudUsers />} />
-        <Route path='/categories' element={<CrudCategory />} />
-        </Route>
+
+        <Route path='/books' element={isAuthenticated ? <Books /> : <Login setIsLogged={setIsLogged} />} />
+        <Route path='/' element={!isAuthenticated ? <Login setIsLogged={setIsLogged} /> : <Books />} />
+        <Route path='/register' element={!isAuthenticated ? <Register /> : <Books />} />
+        <Route path='/favorites' element={isAuthenticated ? <Favorites /> : <Login setIsLogged={setIsLogged} />} />
+        <Route path='/recover' element={!isAuthenticated ? <RecoverPass /> : <Books />} />
+        <Route path='/reset_password/:id/:token' element={!isAuthenticated ? <ResetPass /> : <Books />} />
+
+        <Route path='*' element={<Error />} />
       </Routes>
-      {!hideFooter && <Footer />}
+    <Footer />
     </>
   )
 }
