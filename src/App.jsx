@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import { Toaster } from 'sonner'
 import Login from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
@@ -14,7 +13,7 @@ function App() {
       <Toaster richColors/>
       <Routes>
         <Route path='/' element={<Login setIsLogged={setIsLogged}/>}/>
-        <Route path='/main' element={<Main/>}/>
+        <Route path='/main' element={<Main isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
       </Routes>
     </>
   )
