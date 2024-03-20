@@ -1,10 +1,10 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 
-const DashBoardLayout = ({children}) => {
+const DashBoardLayout = ({isLogged, setIsLogged,  children}) => {
   return (
     <div className='flex'>
-        <Sidebar />
+        <Sidebar isLogged={isLogged} setIsLogged={setIsLogged}/>
         {children}
     </div>
   )
