@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useState,useEffect} from 'react'
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
@@ -11,11 +11,13 @@ import { getUsers } from '../store/UserSlice';
 
 
 const UsersTable = () => {
+    const [pending, setPending] = useState(true)
     const users = useSelector(state => state.users.users) // Obtenemos los usuarios del estado de Redux
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getUsers())
+        setPending(false)
     }, [])
     
     const columns = [
@@ -84,6 +86,7 @@ const UsersTable = () => {
             highlightOnHover
 		    pointerOnHover
             paginationComponentOptions={paginationComponentOptions}
+            progressPending={pending}
 		/>
     </div>
   )
