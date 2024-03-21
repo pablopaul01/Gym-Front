@@ -26,12 +26,12 @@ const Sidebar = ({isLogged, setIsLogged}) => {
             {/* <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>  */}
             <ul className="menu p-4 w-60 min-h-full bg-[#18181B] flex items-center m-0">
             <div className='w-full flex justify-center mb-12'>
-                <img src="https://res.cloudinary.com/dm1sgld8c/image/upload/v1710946840/media/logo2_c1gnzt.png" alt="Logo" className='w-40'/>
+                <img src="https://res.cloudinary.com/dm1sgld8c/image/upload/v1710946840/media/logo2_c1gnzt.png" alt="Logo" className='w-40 py-5'/>
             </div>
             {
                     isLogged && (
                         <>
-                        <li><Link to={'/books'} className={location.pathname === '/books' ? ' text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Usuarios</Link></li>
+                        <li><Link to={'/usuarios'} className={location.pathname === '/books' ? ' text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Usuarios</Link></li>
                         <li><Link to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Alumnos</Link></li>
                         <li><Link to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Vencimientos</Link></li>
                         <li><Link to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Pagos</Link></li>
