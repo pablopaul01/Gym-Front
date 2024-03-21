@@ -34,7 +34,7 @@ const FormCreateUser = () => {
             console.log(error)
             toast.error("Ocurroió un problema! Intentelo más tarde.",{position:"top-right"})
         } finally {
-
+            document.getElementById(`modal_1`).close()
             setLoading(false); 
             reset();
         }
