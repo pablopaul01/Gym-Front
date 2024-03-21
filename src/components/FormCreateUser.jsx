@@ -28,7 +28,6 @@ const FormCreateUser = () => {
         try {
             setLoading(true);
             const response = await axiosInstance.post("/registrar", data)
-            navigate("/");
             toast.success("Cuenta creada correctamente!",{position:"top-right"});
             dispatch(getUsers())
         } catch (error) {

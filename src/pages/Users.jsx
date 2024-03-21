@@ -14,10 +14,6 @@ const Users = ({isLogged, setIsLogged}) => {
     const users = useSelector(state => state.users.users) // Obtenemos los usuarios del estado de Redux
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getUsers())
-    }, [])
-    console.log(users)
   return (
     <DashBoardLayout isLogged={isLogged} setIsLogged={setIsLogged}>
 
@@ -35,7 +31,7 @@ const Users = ({isLogged, setIsLogged}) => {
                 </div>
         </Modal>
     </div>    
-        <UsersTable users={users}/>
+        <UsersTable/>
     </div>
     </DashBoardLayout>
   )
