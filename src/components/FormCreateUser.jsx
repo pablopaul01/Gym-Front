@@ -42,7 +42,7 @@ const FormCreateUser = () => {
 
   return (
     <form
-      className="mt-10 flex flex-col gap-5"
+      className="mt-5 flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <label

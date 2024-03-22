@@ -8,6 +8,8 @@ import { axiosInstance } from '../config/axiosInstance';
 import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../store/UserSlice';
+import Modal from './Modal';
+import FormEditUser from './FormEditUser';
 
 
 const UsersTable = () => {
@@ -49,7 +51,20 @@ const UsersTable = () => {
           selector: row => {
               return (
                   <div style={{ display: "flex", gap: "5px", justifyContent: "center" , minWidth: "150px"}}>
-                      <button className="btn btn-outline-light btn-sm d-flex align-items-center " title="Editar"  onClick={() => {  }}><FaRegEdit className='t-1'/></button>
+                        <Modal
+                            btnA={ 
+                                <button className="btn btn-outline-light btn-sm d-flex align-items-center " title="Editar">
+                                    <FaRegEdit className='t-1'/>
+                                </button>
+                                }
+                            id={row._id+1}
+                        >
+                            <div className='flex flex-col gap-5'>
+                            <h3 className='font-bold text-lg'>Editar Usuario</h3>
+                            <FormEditUser id={row._id} name={row.name} lastname={row.lastname} email={row.email}/>
+                            </div>
+                        </Modal>
+
                       <button className="btn btn-danger btn-sm d-flex align-items-center" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}><FaTrashAlt className='t-1'/></button>
                   </div>
               )

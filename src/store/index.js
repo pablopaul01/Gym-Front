@@ -17,7 +17,7 @@ import UserSlice from './UserSlice'
 
 const store = configureStore({
   reducer: {
-    users: UserSlice,
+    users: UserSlice
     // account: AccountSlice,
     // room: RoomSlice,
     // theme: ThemeSlice,

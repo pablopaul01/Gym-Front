@@ -23,8 +23,8 @@ const Users = ({isLogged, setIsLogged}) => {
                 btnA={<ActionButton value={`Crear nuevo usario`} />}
                 id={1}
               >
-                <div className='flex flex-col gap-5'>
-                  <h3 className='font-bold text-xl'>Crear nuevo usuario</h3>
+                <div className='flex flex-col'>
+                  <h3 className='font-bold text-xl text-black'>Crear nuevo usuario</h3>
                   <div className='modal-action' method='dialog'>
                     <FormCreateUser />
                   </div>
