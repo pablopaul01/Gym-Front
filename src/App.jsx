@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
 import Main from './pages/Main'
 import Users from './pages/Users'
+import Members from './pages/Members'
 
 function App() {
   const [isLogged, setIsLogged] = useState(()=>{
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Login setIsLogged={setIsLogged}/>}/>
         <Route path='/main' element={<Main isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
         <Route path='/users' element={<Users isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+        <Route path='/members' element={<Members isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
       </Routes>
     </>
   )

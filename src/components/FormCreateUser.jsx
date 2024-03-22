@@ -42,7 +42,7 @@ const FormCreateUser = () => {
 
   return (
     <form
-      className="mt-5 flex flex-col gap-5"
+      className=" flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <label
@@ -197,24 +197,10 @@ const FormCreateUser = () => {
           <span className="loading loading-bars loading-lg"></span>
         </div>
       ) : (
-        <div className="d-grid mt-8 mb-4">
+        <div className="d-grid mt-4 mb-4">
           <ActionButton value={"Crear cuenta"} type="submit" />
         </div>
       )}
-      <div className="mt-3 text-center text-sm" id="btn-registro">
-        <span>
-          ¿Ya tienes cuenta registrada?
-          <Link to="/" className="font-semibold">
-            {" "}
-            Iniciar sesión
-          </Link>
-        </span>
-      </div>
-      <div className="text-center font-bold text-sm">
-        <Link to="/error" className=" mb-4">
-          ¿Olvidaste tu contraseña?
-        </Link>
-      </div>
     </form>
   );
 };
