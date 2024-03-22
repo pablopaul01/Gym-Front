@@ -63,10 +63,10 @@ const MembersTable = () => {
           name: "Acciones",
           selector: row => {
               return (
-                  <div style={{ display: "flex", gap: "5px", justifyContent: "center" , minWidth: "150px"}}>
+                  <div >
                         <Modal
                             btnA={ 
-                                <button className="btn btn-outline-light btn-sm d-flex align-items-center " title="Editar">
+                                <button className="btn btn-outline-light btn-sm d-flex align-items-center my-2" title="Editar">
                                     <FaRegEdit className='t-1'/>
                                 </button>
                                 }
@@ -78,7 +78,7 @@ const MembersTable = () => {
                             </div>
                         </Modal>
 
-                      <button className="btn btn-danger btn-sm d-flex align-items-center" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}><FaTrashAlt className='t-1'/></button>
+                      <button className="btn btn-danger btn-sm d-flex align-items-center mb-2" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}><FaTrashAlt className='t-1'/></button>
                   </div>
               )
           },

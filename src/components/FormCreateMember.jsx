@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import ActionButton from './ActionButton'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
-import { REGISTRO_SCHEMA } from '../helpers/validationSchemas'
 import { toast } from 'sonner'
 import { FaUser } from "react-icons/fa6";
 import { useDispatch } from 'react-redux'
@@ -11,13 +10,14 @@ import { FaWhatsapp } from "react-icons/fa";
 import { PiIdentificationCardLight } from "react-icons/pi";
 import { RiHealthBookLine } from "react-icons/ri";
 import { getMembers } from '../store/MemberSlice'
+import { MEMBER_SCHEMA } from '../helpers/validationSchemas'
 
 const FormCreateMember = () => {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver(REGISTRO_SCHEMA)
+        resolver: yupResolver(MEMBER_SCHEMA)
     })
 
     const onSubmit = async (data) => {
@@ -25,7 +25,7 @@ const FormCreateMember = () => {
         try {
             setLoading(true);
             const response = await axiosInstance.post("/alumno", data)
-            toast.success("Cuenta creada correctamente!",{position:"top-right"});
+            toast.success("Alumno cargado correctamente!",{position:"top-right"});
             dispatch(getMembers())
         } catch (error) {
             console.log(error)
