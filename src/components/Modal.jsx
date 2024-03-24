@@ -22,7 +22,7 @@ const Modal = ({ btnText, btnA, id, children}) => {
         )
       }
       <dialog id={`modal_${id}`} className='modal border border-black' >
-        <div className='modal-box overflow-visible h-full w-auto px-10 bg-white rounded-box bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-80 shadow-2xl'>
+        <div className='modal-box overflow-visible w-auto px-10 bg-white rounded-box bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-80 shadow-2xl'>
           {children}
           <form method='dialog'>
             <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>

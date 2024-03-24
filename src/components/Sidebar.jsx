@@ -22,9 +22,9 @@ const Sidebar = ({isLogged, setIsLogged}) => {
 
   return (
     <div className="text-white">
-        <div className="h-[100vh]">
+        <div className="h-[100vh] w-[190px]">
             {/* <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>  */}
-            <ul className="menu p-4 w-60 min-h-full bg-[#18181B] flex items-center m-0">
+            <ul className="menu p-4 min-h-full bg-[#18181B] flex items-center m-0">
             <div className='w-full flex justify-center mb-12'>
                 <img src="https://res.cloudinary.com/dm1sgld8c/image/upload/v1710946840/media/logo2_c1gnzt.png" alt="Logo" className='w-40 py-5'/>
             </div>

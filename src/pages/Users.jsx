@@ -18,20 +18,20 @@ const Users = ({isLogged, setIsLogged}) => {
     <DashBoardLayout isLogged={isLogged} setIsLogged={setIsLogged}>
 
     <div className='h-[100vh] bg-slate-100 flex justify-center w-full flex flex-col px-20 gap-5 items-start'>
-    <div className='flex justify-start items-center'>
-        <Modal
-                btnA={<ActionButton value={`Crear nuevo usario`} />}
-                id={1}
-              >
-                <div className='flex flex-col'>
-                  <h3 className='font-bold text-xl text-black'>Crear nuevo usuario</h3>
-                  <div className='modal-action' method='dialog'>
-                    <FormCreateUser />
+      <div className='flex justify-start items-center'>
+          <Modal
+                  btnA={<ActionButton value={`Crear nuevo usario`} />}
+                  id={1}
+                >
+                  <div className='flex flex-col'>
+                    <h3 className='font-bold text-xl text-black'>Crear nuevo usuario</h3>
+                    <div className='modal-action' method='dialog'>
+                      <FormCreateUser />
+                    </div>
                   </div>
-                </div>
-        </Modal>
-    </div>    
-        <UsersTable/>
+          </Modal>
+      </div>    
+      <UsersTable/>
     </div>
     </DashBoardLayout>
   )

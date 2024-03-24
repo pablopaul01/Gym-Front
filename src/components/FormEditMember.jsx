@@ -1,31 +1,35 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import ActionButton from './ActionButton'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'sonner'
 import { FaUser } from "react-icons/fa6";
-import { useDispatch } from 'react-redux'
 import { axiosInstance } from '../config/axiosInstance'
-import { FaWhatsapp } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
 import { PiIdentificationCardLight } from "react-icons/pi";
 import { RiHealthBookLine } from "react-icons/ri";
+import { FaWhatsapp } from "react-icons/fa";
 import { getMembers } from '../store/MemberSlice'
-import { MEMBER_SCHEMA } from '../helpers/validationSchemas'
+import { EDITMEMBER_SCHEMA } from '../helpers/validationSchemas'
 
-const FormCreateMember = () => {
+
+const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial}) => {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch()
+    
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver(MEMBER_SCHEMA)
+        resolver: yupResolver(EDITMEMBER_SCHEMA)
     })
 
+
     const onSubmit = async (data) => {
-      console.log("entrpo para guardar")
         try {
             setLoading(true);
-            const response = await axiosInstance.post("/alumno", data)
-            toast.success("Alumno cargado correctamente!",{position:"top-right"});
+            const response = await axiosInstance.put(`/alumno/${id}`, data)
+            toast.success("Cuenta actualizada correctamente!",{position:"top-right"});
             dispatch(getMembers())
         } catch (error) {
             console.log(error)
@@ -37,39 +41,52 @@ const FormCreateMember = () => {
         }
     }
 
+    const handleReset = () => {
+        reset()
+        document.getElementById(`modal_${id+1}`).close()
+    }
+
   return (
     <form
       className="mt-5 flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaUser className="w-4 h-4 opacity-70" />
-        <input
-          type="text"
-          className="grow"
-          placeholder="Nombre"
-          name="name"
-          {...register("name")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaUser className="w-4 h-4 opacity-70" />
-        <input
-          type="text"
-          className="grow"
-          placeholder="Apellido"
-          name="lastname"
-          {...register("lastname")}
-          maxLength={40}
-        />
-      </label>
+      <div className='flex gap-2'>
+        <div className='w-50'>
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <FaUser className="w-4 h-4 opacity-70" />
+            <input
+              type="text"
+              className="w-full"
+              defaultValue={name}
+              placeholder='Nombre'
+              name="name"
+              {...register("name")}
+              maxLength={40}
+            />
+          </label>
+        </div>
+        <div className='w-50'>
+        <label
+          className="input input-bordered flex items-center gap-2"
+          data-theme="light"
+        >
+          <FaUser className="w-4 h-4 opacity-70" />
+          <input
+            type="text"
+            className="w-full"
+            defaultValue={lastname}
+            placeholder="Apellido"
+            name="lastname"
+            {...register("lastname")}
+            maxLength={40}
+          />
+        </label>
+        </div>
+      </div>
       <label
         className="input input-bordered flex items-center gap-2"
         data-theme="light"
@@ -79,6 +96,7 @@ const FormCreateMember = () => {
           type="number"
           className="grow"
           placeholder="DNI"
+          defaultValue={dni}
           name="dni"
           {...register("dni")}
           maxLength={40}
@@ -93,6 +111,7 @@ const FormCreateMember = () => {
           type="number"
           className="grow"
           placeholder="Whatsapp"
+          defaultValue={whatsapp}
           name="whatsapp"
           {...register("whatsapp")}
           maxLength={40}
@@ -107,6 +126,7 @@ const FormCreateMember = () => {
           type="text"
           className="grow"
           placeholder="Obra social"
+          defaultValue={obraSocial}
           name="obraSocial"
           {...register("obraSocial")}
           maxLength={40}
@@ -117,12 +137,18 @@ const FormCreateMember = () => {
           <span className="loading loading-bars loading-lg"></span>
         </div>
       ) : (
-        <div className="d-grid mt-4 mb-4">
-          <ActionButton value={"Cargar Alumno"} type="submit" />
+        <div className="flex justify-end mt-8 mb-4 gap-3">
+            <div className='w-50' >
+                <ActionButton value={"Salir sin guardar"} type="button"  accion={handleReset} variante={"btn-error"} />
+            </div>
+            <div className='w-50'>
+                <ActionButton value={"Guardar cambios"} type="submit" />
+            </div>
         </div>
       )}
-    </form>
-  );
-};
 
-export default FormCreateMember;
+    </form>
+  )
+}
+
+export default FormEditMember

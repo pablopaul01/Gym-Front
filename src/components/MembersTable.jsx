@@ -2,15 +2,12 @@ import React, { useState,useEffect} from 'react'
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
-import { ImBlocked } from "react-icons/im";
-import { MdAudiotrack } from "react-icons/md";
 import { axiosInstance } from '../config/axiosInstance';
 import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../store/UserSlice';
 import Modal from './Modal';
-import FormEditUser from './FormEditUser';
 import { getMembers } from '../store/MemberSlice';
+import FormEditMember from './FormEditMember';
 
 
 const MembersTable = () => {
@@ -73,8 +70,8 @@ const MembersTable = () => {
                             id={row._id+1}
                         >
                             <div className='flex flex-col gap-5'>
-                            <h3 className='font-bold text-lg'>Editar Usuario</h3>
-                            <FormEditUser id={row._id} name={row.name} lastname={row.lastname} email={row.email}/>
+                            <h3 className='font-bold text-lg'>Editar Alumno</h3>
+                            <FormEditMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} />
                             </div>
                         </Modal>
 
@@ -95,9 +92,9 @@ const MembersTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axiosInstance.delete(`/usuario/${id}`)
-            toast.success("Usuario eliminado correctamente!",{position:"top-right"});
-            dispatch(getUsers())
+            await axiosInstance.delete(`/alumno/${id}`)
+            toast.success("Alumno eliminado correctamente!",{position:"top-right"});
+            dispatch(getMembers())
         } catch (error) {
             console.log(error)
         } finally {
