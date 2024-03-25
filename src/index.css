@@ -16,6 +16,11 @@
   margin:0;
 }
 
+
+#sidebar a.active {
+  color: #16b187 ;
+}
+
 /* a {
   font-weight: 500;
   color: #646cff;

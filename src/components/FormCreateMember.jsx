@@ -42,34 +42,40 @@ const FormCreateMember = () => {
       className="mt-5 flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaUser className="w-4 h-4 opacity-70" />
-        <input
-          type="text"
-          className="grow"
-          placeholder="Nombre"
-          name="name"
-          {...register("name")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaUser className="w-4 h-4 opacity-70" />
-        <input
-          type="text"
-          className="grow"
-          placeholder="Apellido"
-          name="lastname"
-          {...register("lastname")}
-          maxLength={40}
-        />
-      </label>
+      <div className='flex gap-2'>
+        <div className='w-50'>
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <FaUser className="w-4 h-4 opacity-70" />
+            <input
+              type="text"
+              className="w-full"
+              placeholder="Nombre"
+              name="name"
+              {...register("name")}
+              maxLength={40}
+            />
+          </label>
+        </div>
+        <div className='w-50'>
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <FaUser className="w-4 h-4 opacity-70" />
+            <input
+              type="text"
+              className="w-full"
+              placeholder="Apellido"
+              name="lastname"
+              {...register("lastname")}
+              maxLength={40}
+            />
+          </label>
+        </div>
+      </div>
       <label
         className="input input-bordered flex items-center gap-2"
         data-theme="light"

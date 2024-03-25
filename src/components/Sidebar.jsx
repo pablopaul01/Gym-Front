@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 
 const Sidebar = ({isLogged, setIsLogged}) => {
@@ -21,7 +21,7 @@ const Sidebar = ({isLogged, setIsLogged}) => {
     }, [isLogged])
 
   return (
-    <div className="text-white">
+    <div className="text-white" id='sidebar'>
         <div className="h-[100vh] w-[190px]">
             {/* <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>  */}
             <ul className="menu p-4 min-h-full bg-[#18181B] flex items-center m-0">
@@ -31,10 +31,10 @@ const Sidebar = ({isLogged, setIsLogged}) => {
             {
                     isLogged && (
                         <>
-                        <li><Link to={'/users'} className={location.pathname === '/books' ? ' text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Usuarios</Link></li>
-                        <li><Link to={'/members'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Alumnos</Link></li>
-                        <li><Link to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Vencimientos</Link></li>
-                        <li><Link to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Pagos</Link></li>
+                        <li><NavLink to={'/users'} className={location.pathname === '/books' ? ' text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Usuarios</NavLink></li>
+                        <li><NavLink to={'/members'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Alumnos</NavLink></li>
+                        <li><NavLink to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Vencimientos</NavLink></li>
+                        <li><NavLink to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Pagos</NavLink></li>
                         </>
                     )
                 }
