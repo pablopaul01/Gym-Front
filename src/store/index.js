@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import UserSlice from './UserSlice'
 import MemberSlice from './MemberSlice'
+import ProgramSlice from './ProgramSlice'
 // import AccountSlice from './AccountSlice'
 // import RoomSlice from './RoomSlice'
 // import ThemeSlice from './ThemeSlice'
@@ -19,7 +20,8 @@ import MemberSlice from './MemberSlice'
 const store = configureStore({
   reducer: {
     users: UserSlice,
-    members: MemberSlice
+    members: MemberSlice,
+    programs: ProgramSlice,
     // account: AccountSlice,
     // room: RoomSlice,
     // theme: ThemeSlice,

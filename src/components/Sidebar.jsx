@@ -23,7 +23,6 @@ const Sidebar = ({isLogged, setIsLogged}) => {
   return (
     <div className="text-white" id='sidebar'>
         <div className="h-[100vh] w-[190px]">
-            {/* <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>  */}
             <ul className="menu p-4 min-h-full bg-[#18181B] flex items-center m-0">
             <div className='w-full flex justify-center mb-12'>
                 <img src="https://res.cloudinary.com/dm1sgld8c/image/upload/v1710946840/media/logo2_c1gnzt.png" alt="Logo" className='w-40 py-5'/>
@@ -33,12 +32,12 @@ const Sidebar = ({isLogged, setIsLogged}) => {
                         <>
                         <li><NavLink to={'/users'} className={location.pathname === '/books' ? ' text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Usuarios</NavLink></li>
                         <li><NavLink to={'/members'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Alumnos</NavLink></li>
-                        <li><NavLink to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Vencimientos</NavLink></li>
+                        <li><NavLink to={'/programs'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Programas</NavLink></li>
+                        <li><NavLink to={'/expirations'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Vencimientos</NavLink></li>
                         <li><NavLink to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Pagos</NavLink></li>
                         </>
                     )
                 }
-
                     <li>
                         {
                             isLogged ? 

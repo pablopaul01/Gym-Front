@@ -23,3 +23,5 @@ export const REGISTRO_SCHEMA = yup.object({
 
   export const MEMBER_SCHEMA = yup.object({})
   export const EDITMEMBER_SCHEMA = yup.object({})
+  export const PROGRAM_SCHEMA = yup.object({})
+  export const PROGRAMEDIT_SCHEMA = yup.object({})
