@@ -21,7 +21,6 @@ const FormCreateMember = () => {
     })
 
     const onSubmit = async (data) => {
-      console.log("entrpo para guardar")
         try {
             setLoading(true);
             const response = await axiosInstance.post("/alumno", data)

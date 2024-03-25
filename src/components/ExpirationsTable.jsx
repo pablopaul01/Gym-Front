@@ -8,11 +8,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from './Modal';
 import { getMembers } from '../store/MemberSlice';
 import FormEditMember from './FormEditMember';
+import { FaPencilAlt } from "react-icons/fa";
+import moment from 'moment';
+import FormEditExpiration from './FormEditExpiration';
+import FormEditCicle from './FormEditCicle';
 
 
-const ExpirationsTable = () => {
+
+const ExpirationsTable = ({members}) => {
     const [pending, setPending] = useState(true)
-    const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
+    // const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -45,42 +50,88 @@ const ExpirationsTable = () => {
           center: "true",
         },
         {
-          name: 'Whatsapp',
-          selector: row => row.whatsapp,
+          name: 'Programa',
+          selector: row => row.programa,
           sortable: true,
           center: "true",
         },
         {
-          name: 'Obra social',
-          selector: row => row.obraSocial,
+          name: 'Inicio de ciclo',
+          selector: row => 
+          <div className='flex justify-center items-center'>
+            {moment.utc(row.fecha_inicio_ciclo).format('DD/MM/YYYY')} 
+            <Modal
+                      btnA={ 
+                          <button className="btn btn-ghost btn-sm d-flex align-items-center" title="Editar inicio de ciclo">
+                              <FaPencilAlt />
+                          </button>
+                          }
+                      id={row._id+1}
+                  >
+                      <div className='flex flex-col gap-5'>
+                      <h3 className='font-bold text-lg text-black'>Editar inicio de ciclo</h3>
+                      <FormEditCicle id={row._id} vencimiento={row.fecha_inicio_ciclo} />
+                      </div>
+                  </Modal>
+          </div>,
           sortable: true,
           center: "true",
         },
         {
-          name: "Acciones",
-          selector: row => {
-              return (
-                  <div >
-                        <Modal
-                            btnA={ 
-                                <button className="btn btn-outline-light btn-sm d-flex align-items-center my-2" title="Editar">
-                                    <FaRegEdit className='t-1'/>
-                                </button>
-                                }
-                            id={row._id+1}
-                        >
-                            <div className='flex flex-col gap-5'>
-                            <h3 className='font-bold text-lg'>Editar Alumno</h3>
-                            <FormEditMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} />
-                            </div>
-                        </Modal>
+          name: 'Vencimiento',
+          selector: row => 
+            <div className='flex justify-center items-center'>
+              {moment.utc(row.proximo_vencimiento).format('DD/MM/YYYY')}
+                  <Modal
+                      btnA={ 
+                          <button className="btn btn-ghost btn-sm d-flex align-items-center" title="Editar Vencimiento">
+                              <FaPencilAlt />
+                          </button>
+                          }
+                      id={row._id+2}
+                  >
+                      <div className='flex flex-col gap-5'>
+                      <h3 className='font-bold text-lg text-black'>Editar Vencimiento</h3>
+                      <FormEditExpiration id={row._id} vencimiento={row.proximo_vencimiento} />
+                      </div>
+                  </Modal>
+            </div>,
+          sortable: true,
+          center: "true",
+        },
+      ];
 
-                      <button className="btn btn-danger btn-sm d-flex align-items-center mb-2" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}><FaTrashAlt className='t-1'/></button>
-                  </div>
-              )
+      const conditionalRowStyles = [
+        {
+          when: row => moment(row.proximo_vencimiento).isBefore(moment().add(1, 'day')),
+          style: {
+            backgroundColor: 'rgba(242, 38, 19, 0.9)', // Rojo
+            color: 'white',
+            '&:hover': {
+              cursor: 'pointer',
+            },
           },
-          center: "true",
-      }
+        },
+        {
+          when: row => moment(row.proximo_vencimiento).isBetween(moment(), moment().add(5, 'days').endOf('day')),
+          style: {
+            backgroundColor: 'rgba(255, 235, 59, 0.9)', // Amarillo
+            color: 'black',
+            '&:hover': {
+              cursor: 'pointer',
+            },
+          },
+        },
+        {
+          when: row => moment(row.proximo_vencimiento).isAfter(moment().add(5, 'days').endOf('day')),
+          style: {
+            backgroundColor: 'rgba(63, 195, 128, 0.9)', // Verde
+            color: 'white',
+            '&:hover': {
+              cursor: 'pointer',
+            },
+          },
+        },
       ];
 
       const paginationComponentOptions = {
@@ -90,27 +141,18 @@ const ExpirationsTable = () => {
         selectAllRowsItemText: 'Todos',
     };
 
-    const handleDelete = async (id) => {
-        try {
-            await axiosInstance.delete(`/alumno/${id}`)
-            toast.success("Alumno eliminado correctamente!",{position:"top-right"});
-            dispatch(getMembers())
-        } catch (error) {
-            console.log(error)
-        } finally {
 
-        }
-    }
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
         <DataTable
+            noDataComponent="No hay datos para mostrar"
 			      columns={columns}
 			      data={members}
             pagination
-            highlightOnHover
 		        pointerOnHover
             paginationComponentOptions={paginationComponentOptions}
             progressPending={pending}
+            conditionalRowStyles={conditionalRowStyles}
 		      />
     </div>
   )
