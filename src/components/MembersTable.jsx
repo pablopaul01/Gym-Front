@@ -10,12 +10,20 @@ import { getMembers } from '../store/MemberSlice';
 import FormEditMember from './FormEditMember';
 import { IoMdEye } from "react-icons/io";
 import FormMember from './FormMember';
+import { getPrograms } from '../store/ProgramSlice';
+
 
 
 const MembersTable = () => {
     const [pending, setPending] = useState(true)
     const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
     const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch(getPrograms())
+    }, [])
+    
+
 
     useEffect(() => {
         dispatch(getMembers())
@@ -61,7 +69,7 @@ const MembersTable = () => {
                         >
                             <div className='flex flex-col gap-5'>
                             <h3 className='font-bold text-lg'>Editar Alumno</h3>
-                            <FormEditMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} />
+                            <FormEditMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} programa={row.clases?._id} />
                             </div>
                         </Modal>
 
@@ -77,8 +85,13 @@ const MembersTable = () => {
                             id={row._id+"data"}
                         >
                             <div className='flex flex-col gap-5'>
-                            <h3 className='font-bold text-lg'>Ficha del Alumno</h3>
-                            <FormMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} programa={row.programa} proximo_vencimiento={row.proximo_vencimiento} inicioCiclo={row.fecha_inicio_ciclo} />
+                            <h3 className='font-bold text-lg'>Ficha del Alumno - {row.name} {row.lastname}</h3>
+                            <FormMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} programa={row.programa} proximo_vencimiento={row.proximo_vencimiento} inicioCiclo={row.fecha_inicio_ciclo} 
+                            ultimoPago={row?.pagos[row?.pagos.length-1]?.fecha_de_pago} 
+                            medioPago={row?.pagos[row?.pagos.length-1]?.medio_de_pago} 
+                            montoPago={row?.pagos[row?.pagos.length-1]?.monto} 
+                            />
+                            {/* {console.log("pago", members[0]?.pagos[members[0]?.pagos.length-1])} */}
                             </div>
                         </Modal>
                   </div>
@@ -106,6 +119,8 @@ const MembersTable = () => {
 
         }
     }
+
+    console.log(members)
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
         <DataTable

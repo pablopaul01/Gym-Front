@@ -52,7 +52,7 @@ const ExpirationsTable = ({members}) => {
         },
         {
           name: 'Programa',
-          selector: row => row.programa,
+          selector: row => row.clases?.name,
           sortable: true,
           center: "true",
         },

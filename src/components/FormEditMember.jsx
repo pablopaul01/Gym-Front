@@ -12,14 +12,16 @@ import { RiHealthBookLine } from "react-icons/ri";
 import { FaWhatsapp } from "react-icons/fa";
 import { getMembers } from '../store/MemberSlice'
 import { EDITMEMBER_SCHEMA } from '../helpers/validationSchemas'
+import { CgGym } from 'react-icons/cg'
+import { getPrograms } from '../store/ProgramSlice'
 
 
-const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial}) => {
+const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa}) => {
     const [loading, setLoading] = useState(false);
-
+ console.log(programa)
     const dispatch = useDispatch()
     
-
+    const programs = useSelector(state => state.programs.programs)
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(EDITMEMBER_SCHEMA)
     })
@@ -87,51 +89,77 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial}) => {
         </label>
         </div>
       </div>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <PiIdentificationCardLight className="w-4 h-4 opacity-70"/>
-        <input
-          type="number"
-          className="grow"
-          placeholder="DNI"
-          defaultValue={dni}
-          name="dni"
-          {...register("dni")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaWhatsapp className="w-4 h-4 opacity-70"/>
-        <input
-          type="number"
-          className="grow"
-          placeholder="Whatsapp"
-          defaultValue={whatsapp}
-          name="whatsapp"
-          {...register("whatsapp")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <RiHealthBookLine className="w-4 h-4 opacity-70"/>
-        <input
-          type="text"
-          className="grow"
-          placeholder="Obra social"
-          defaultValue={obraSocial}
-          name="obraSocial"
-          {...register("obraSocial")}
-          maxLength={40}
-        />
-      </label>
+      <div className='flex gap-2'>
+        <div className='w-50'>
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <PiIdentificationCardLight className="w-4 h-4 opacity-70"/>
+            <input
+              type="number"
+              className="grow w-full"
+              placeholder="DNI"
+              defaultValue={dni}
+              name="dni"
+              {...register("dni")}
+              maxLength={40}
+            />
+          </label>
+        </div>
+        <div className='w-50'>
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <FaWhatsapp className="w-4 h-4 opacity-70"/>
+            <input
+              type="number"
+              className="grow w-full"
+              placeholder="Whatsapp"
+              defaultValue={whatsapp}
+              name="whatsapp"
+              {...register("whatsapp")}
+              maxLength={40}
+            />
+          </label>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <div className="w-50">
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <RiHealthBookLine className="w-4 h-4 opacity-70"/>
+            <input
+              type="text"
+              className="grow w-full"
+              placeholder="Obra social"
+              defaultValue={obraSocial}
+              name="obraSocial"
+              {...register("obraSocial")}
+              maxLength={40}
+            />
+          </label>
+        </div>
+        <div className="w-50">
+          <label
+            className="input input-bordered flex items-center gap-2"
+            data-theme="light"
+          >
+            <CgGym className="w-5 h-5 opacity-70"/>
+            <select id="" className='w-full'  name="clases" {...register("clases")}>
+              <option value="0">Seleccione programa</option>
+              {
+                programs.map(program =>(
+                  <option key={program._id} value={program._id}  selected={program._id === programa}>{program.name}</option>
+                ))
+              }
+            </select>
+          </label>
+        </div>
+      </div>
       {loading ? (
         <div className="flex mt-3 justify-center mt-4 mb-3">
           <span className="loading loading-bars loading-lg"></span>
