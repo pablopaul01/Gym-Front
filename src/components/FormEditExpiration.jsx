@@ -29,11 +29,12 @@ const FormEditExpiration = ({id, vencimiento}) => {
             const response = await axiosInstance.put(`/alumno/vencimiento/${id}`, data)
             toast.success("Vencimiento actualizado correctamente!",{position:"top-right"});
             dispatch(getMembers())
+            setLoading(false); 
         } catch (error) {
             console.log(error)
             toast.error("Ocurroió un problema! Intentelo más tarde.",{position:"top-right"})
         } finally {
-            // document.getElementById(`modal_1`).close()
+          document.getElementById(`modal_${id+2}`).close()
             setLoading(false); 
             reset();
         }
@@ -41,7 +42,7 @@ const FormEditExpiration = ({id, vencimiento}) => {
 
     const handleReset = () => {
         reset()
-        // document.getElementById(`modal_${id+1}`).close()
+        document.getElementById(`modal_${id+1}`).close()
     }
 
   return (

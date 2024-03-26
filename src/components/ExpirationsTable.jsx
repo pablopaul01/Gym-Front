@@ -20,6 +20,7 @@ const ExpirationsTable = ({members}) => {
     // const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
     const dispatch = useDispatch()
 
+    console.log("members", members)
     useEffect(() => {
         dispatch(getMembers())
         setPending(false)
@@ -103,7 +104,7 @@ const ExpirationsTable = ({members}) => {
 
       const conditionalRowStyles = [
         {
-          when: row => moment(row.proximo_vencimiento).isBefore(moment().add(1, 'day')),
+          when: row => moment.utc(row.proximo_vencimiento).isBefore(moment().utc()),
           style: {
             backgroundColor: 'rgba(242, 38, 19, 0.9)', // Rojo
             color: 'white',
@@ -113,7 +114,10 @@ const ExpirationsTable = ({members}) => {
           },
         },
         {
-          when: row => moment(row.proximo_vencimiento).isBetween(moment(), moment().add(5, 'days').endOf('day')),
+          when: row => moment(row.proximo_vencimiento).isBetween(
+            moment().startOf('day'), 
+            moment().utc().add(5, 'days').endOf('day')
+          ),
           style: {
             backgroundColor: 'rgba(255, 235, 59, 0.9)', // Amarillo
             color: 'black',
@@ -123,7 +127,7 @@ const ExpirationsTable = ({members}) => {
           },
         },
         {
-          when: row => moment(row.proximo_vencimiento).isAfter(moment().add(5, 'days').endOf('day')),
+          when: row => moment.utc(row.proximo_vencimiento).isAfter(moment().utc().add(5, 'days').endOf('day')),
           style: {
             backgroundColor: 'rgba(63, 195, 128, 0.9)', // Verde
             color: 'white',
@@ -133,7 +137,7 @@ const ExpirationsTable = ({members}) => {
           },
         },
       ];
-
+      
       const paginationComponentOptions = {
         rowsPerPageText: 'Filas por página',
         rangeSeparatorText: 'de',

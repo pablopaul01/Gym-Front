@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from './Modal';
 import { getMembers } from '../store/MemberSlice';
 import FormEditMember from './FormEditMember';
+import { IoMdEye } from "react-icons/io";
+import FormMember from './FormMember';
 
 
 const MembersTable = () => {
@@ -45,25 +47,13 @@ const MembersTable = () => {
           center: "true",
         },
         {
-          name: 'Whatsapp',
-          selector: row => row.whatsapp,
-          sortable: true,
-          center: "true",
-        },
-        {
-          name: 'Obra social',
-          selector: row => row.obraSocial,
-          sortable: true,
-          center: "true",
-        },
-        {
           name: "Acciones",
           selector: row => {
               return (
-                  <div >
+                  <div className='flex justify-center gap-2'>
                         <Modal
                             btnA={ 
-                                <button className="btn btn-outline-light btn-sm d-flex align-items-center my-2" title="Editar">
+                                <button className="btn btn-outline-light btn-sm d-flex align-items-center" title="Editar">
                                     <FaRegEdit className='t-1'/>
                                 </button>
                                 }
@@ -75,7 +65,22 @@ const MembersTable = () => {
                             </div>
                         </Modal>
 
-                      <button className="btn btn-danger btn-sm d-flex align-items-center mb-2" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}><FaTrashAlt className='t-1'/></button>
+                      <button className="btn btn-danger btn-sm d-flex align-items-center" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}>
+                          <FaTrashAlt className='t-1'/>
+                      </button>
+                      <Modal
+                            btnA={ 
+                                <button className="btn btn-outline-light btn-sm d-flex align-items-center" title="Ver mas datos">
+                                    <IoMdEye size={20}/>
+                                </button>
+                                }
+                            id={row._id+"data"}
+                        >
+                            <div className='flex flex-col gap-5'>
+                            <h3 className='font-bold text-lg'>Ficha del Alumno</h3>
+                            <FormMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} programa={row.programa} proximo_vencimiento={row.proximo_vencimiento} inicioCiclo={row.fecha_inicio_ciclo} />
+                            </div>
+                        </Modal>
                   </div>
               )
           },

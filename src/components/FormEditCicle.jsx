@@ -33,7 +33,7 @@ const FormEditCicle = ({id, vencimiento}) => {
             console.log(error)
             toast.error("Ocurroió un problema! Intentelo más tarde.",{position:"top-right"})
         } finally {
-            // document.getElementById(`modal_1`).close()
+          document.getElementById(`modal_${id+1}`).close()
             setLoading(false); 
             reset();
         }
