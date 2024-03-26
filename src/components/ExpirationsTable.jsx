@@ -16,15 +16,25 @@ import FormEditCicle from './FormEditCicle';
 
 
 const ExpirationsTable = ({members}) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMembers, setFilteredMembers] = useState([]);
     const [pending, setPending] = useState(true)
-    // const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
     const dispatch = useDispatch()
+    const estado = useSelector(state => state.members)
 
-    console.log("members", members)
     useEffect(() => {
-        dispatch(getMembers())
-        setPending(false)
-    }, [])
+      setFilteredMembers(
+          members.filter(
+              (member) =>
+                  member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  member.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+  }, [searchTerm, members]);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+};
     
     const columns = [
         {
@@ -148,16 +158,34 @@ const ExpirationsTable = ({members}) => {
 
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
+                        <input
+                type="text"
+                placeholder="Buscar por nombre o apellido"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="input input-bordered mb-5 w-full max-w-xs"
+                
+            />
+      {estado.isLoading ? 
+      (
+        <div className="flex mt-3 justify-center mt-4 mb-3">
+          <span className="loading loading-bars loading-lg"></span>
+        </div>
+      )
+      :
+      (
         <DataTable
-            noDataComponent="No hay datos para mostrar"
-			      columns={columns}
-			      data={members}
-            pagination
-		        pointerOnHover
-            paginationComponentOptions={paginationComponentOptions}
-            progressPending={pending}
-            conditionalRowStyles={conditionalRowStyles}
-		      />
+        noDataComponent="No hay datos para mostrar"
+        columns={columns}
+        data={filteredMembers}
+        pagination
+        pointerOnHover
+        paginationComponentOptions={paginationComponentOptions}
+        conditionalRowStyles={conditionalRowStyles}
+      />
+      )
+      }
+
     </div>
   )
 }

@@ -15,20 +15,31 @@ import { getPrograms } from '../store/ProgramSlice';
 
 
 const MembersTable = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMembers, setFilteredMembers] = useState([]);
     const [pending, setPending] = useState(true)
     const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
+    const estado = useSelector(state => state.members)
     const dispatch = useDispatch()
 
     useEffect(() => {
       dispatch(getPrograms())
     }, [])
     
-
-
     useEffect(() => {
         dispatch(getMembers())
         setPending(false)
     }, [])
+
+    useEffect(() => {
+      setFilteredMembers(
+          members.filter(
+              (member) =>
+                  member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  member.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+  }, [searchTerm, members]);
     
     const columns = [
         {
@@ -120,18 +131,40 @@ const MembersTable = () => {
         }
     }
 
-    console.log(members)
-  return (
+    const handleSearch = (event) => {
+      setSearchTerm(event.target.value);
+  };
+
+    return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
-        <DataTable
-			      columns={columns}
-			      data={members}
-            pagination
-            highlightOnHover
-		        pointerOnHover
-            paginationComponentOptions={paginationComponentOptions}
-            progressPending={pending}
-		      />
+                  <input
+                type="text"
+                placeholder="Buscar por nombre o apellido"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="input input-bordered mb-5 w-full max-w-xs"
+                
+            />
+      {
+        estado.isLoading ? 
+        (
+          <div className="flex mt-3 justify-center mt-4 mb-3">
+            <span className="loading loading-bars loading-lg"></span>
+          </div>
+          ) : 
+          (
+            
+            <DataTable
+                columns={columns}
+                data={filteredMembers}
+                pagination
+                highlightOnHover
+                pointerOnHover
+                paginationComponentOptions={paginationComponentOptions}
+                // progressPending={pending}
+              />
+        )
+      }
     </div>
   )
 }

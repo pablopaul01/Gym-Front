@@ -14,6 +14,7 @@ import FormEditProgram from './FormEditProgram';
 const ProgramsTable = () => {
     const [pending, setPending] = useState(true)
     const programs = useSelector(state => state.programs.programs) // Obtenemos los usuarios del estado de Redux
+    const estado = useSelector(state => state.programs)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -86,15 +87,26 @@ const ProgramsTable = () => {
     }
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
-        <DataTable
-			      columns={columns}
-			      data={programs}
-            pagination
-            highlightOnHover
-		        pointerOnHover
-            paginationComponentOptions={paginationComponentOptions}
-            progressPending={pending}
-		      />
+      {
+        estado.isLoading ? 
+        (
+          <div className="flex mt-3 justify-center mt-4 mb-3">
+            <span className="loading loading-bars loading-lg"></span>
+          </div>
+        )
+        :
+        (
+          <DataTable
+              columns={columns}
+              data={programs}
+              pagination
+              highlightOnHover
+              pointerOnHover
+              paginationComponentOptions={paginationComponentOptions}
+              progressPending={pending}
+            />
+        )
+      }
     </div>
   )
 }

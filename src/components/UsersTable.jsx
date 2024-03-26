@@ -15,6 +15,7 @@ import FormEditUser from './FormEditUser';
 const UsersTable = () => {
     const [pending, setPending] = useState(true)
     const users = useSelector(state => state.users.users) // Obtenemos los usuarios del estado de Redux
+    const estado = useSelector(state => state.users)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -94,15 +95,28 @@ const UsersTable = () => {
 
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
-        <DataTable
-			columns={columns}
-			data={users}
-            pagination
-            highlightOnHover
-		    pointerOnHover
-            paginationComponentOptions={paginationComponentOptions}
-            progressPending={pending}
-		/>
+      {
+        estado.isLoading ?
+        (
+          <div className="flex mt-3 justify-center mt-4 mb-3">
+            <span className="loading loading-bars loading-lg"></span>
+          </div>
+        )
+          :
+        (
+
+          <DataTable
+            columns={columns}
+            data={users}
+              pagination
+              highlightOnHover
+            pointerOnHover
+              paginationComponentOptions={paginationComponentOptions}
+              // progressPending={pending}
+          />
+        )
+
+      }
     </div>
   )
 }

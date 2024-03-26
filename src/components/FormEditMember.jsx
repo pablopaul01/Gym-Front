@@ -18,7 +18,6 @@ import { getPrograms } from '../store/ProgramSlice'
 
 const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa}) => {
     const [loading, setLoading] = useState(false);
- console.log(programa)
     const dispatch = useDispatch()
     
     const programs = useSelector(state => state.programs.programs)
@@ -149,11 +148,11 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
             data-theme="light"
           >
             <CgGym className="w-5 h-5 opacity-70"/>
-            <select id="" className='w-full'  name="clases" {...register("clases")}>
+            <select id="" className='w-full'  name="clases" {...register("clases") } defaultValue={programa}>
               <option value="0">Seleccione programa</option>
               {
                 programs.map(program =>(
-                  <option key={program._id} value={program._id}  selected={program._id === programa}>{program.name}</option>
+                  <option key={program._id} value={program._id}  >{program.name}</option>
                 ))
               }
             </select>
