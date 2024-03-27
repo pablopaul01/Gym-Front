@@ -7,6 +7,7 @@ import Users from './pages/Users'
 import Members from './pages/Members'
 import Expirations from './pages/Expirations'
 import Programs from './pages/Programs'
+import Payments from './pages/Payments'
 
 function App() {
   const [isLogged, setIsLogged] = useState(()=>{
@@ -25,6 +26,7 @@ function App() {
         <Route path='/members' element={<Members isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
         <Route path='/expirations' element={<Expirations isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
         <Route path='/programs' element={<Programs isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+        <Route path='/payments' element={<Payments isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
       </Routes>
     </>
   )

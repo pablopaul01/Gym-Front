@@ -127,7 +127,7 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
               <input
                 type="date"
                 className="grow text-center"
-                value={moment(proximo_vencimiento).format('YYYY-MM-DD')}
+                value={moment.utc(proximo_vencimiento).format('YYYY-MM-DD')}
                 name="vencimiento"
                 maxLength={40}
                 readOnly
@@ -146,7 +146,7 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
               <input
                 type="text"
                 className="grow text-center"
-                value={`${moment.utc(ultimoPago).format('DD/MM/YYYY')} - ${medioPago} - $ ${montoPago}`}
+                value={`${moment(ultimoPago).format('DD/MM/YYYY')} - ${medioPago} - $ ${montoPago}`}
                 name="vencimiento"
                 maxLength={40}
                 readOnly

@@ -11,54 +11,61 @@ import FormEditMember from './FormEditMember';
 import { IoMdEye } from "react-icons/io";
 import FormMember from './FormMember';
 import { getPrograms } from '../store/ProgramSlice';
-import { RiMoneyDollarCircleFill } from 'react-icons/ri';
-import FormCreatePayment from './FormCreatePayment';
+import { getPayments } from '../store/PaymentsSlice';
+import moment from 'moment';
 
 
-
-const MembersTable = () => {
+const PaymentsTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredMembers, setFilteredMembers] = useState([]);
+  const [filteredPayments, setFilteredPayments] = useState([]);
     const [pending, setPending] = useState(true)
-    const members = useSelector(state => state.members.members) // Obtenemos los usuarios del estado de Redux
-    const estado = useSelector(state => state.members)
+    const payments = useSelector(state => state.payments.payments) // Obtenemos los usuarios del estado de Redux
+    const estado = useSelector(state => state.payments)
     const dispatch = useDispatch()
 
+
     useEffect(() => {
-      dispatch(getPrograms())
-    }, [])
-    
-    useEffect(() => {
-        dispatch(getMembers())
+        dispatch(getPayments())
         setPending(false)
     }, [])
 
     useEffect(() => {
-      setFilteredMembers(
-          members.filter(
-              (member) =>
-                  member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  member.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+      setFilteredPayments(
+          payments.filter(
+              (payment) =>
+                  payment.alumno.name.toLowerCase().includes(searchTerm.toLowerCase()) 
           )
       );
-  }, [searchTerm, members]);
+  }, [searchTerm, payments]);
     
     const columns = [
         {
-          name: 'Nombre',
-          selector: row => row.name,
+          name: 'Fecha',
+          selector: row =>moment.utc(row.fecha_de_pago).format('DD/MM/YYYY') ,
           sortable: true,
           center: "true",
         },
         {
-          name: 'Apellido',
-          selector: row => row.lastname,
+          name: 'Monto',
+          selector: row => row.monto,
           sortable: true,
           center: "true",
         },
         {
-          name: 'Dni',
-          selector: row => row.dni,
+          name: 'Medio',
+          selector: row => row.medio_de_pago,
+          sortable: true,
+          center: "true",
+        },
+        {
+          name: 'comprobante',
+          selector: row => row.comprobante,
+          sortable: true,
+          center: "true",
+        },
+        {
+          name: 'Alumno',
+          selector: row =><div>{row.alumno.name} {row.alumno.lastname}</div>,
           sortable: true,
           center: "true",
         },
@@ -84,7 +91,7 @@ const MembersTable = () => {
                       <button className="btn btn-danger btn-sm d-flex align-items-center" title="Eliminar"  onClick={() => {handleDelete(row._id)  }}>
                           <FaTrashAlt className='t-1'/>
                       </button>
-                      <Modal
+                      {/* <Modal
                             btnA={ 
                                 <button className="btn btn-outline-light btn-sm d-flex align-items-center" title="Ver mas datos">
                                     <IoMdEye size={20}/>
@@ -99,27 +106,12 @@ const MembersTable = () => {
                             medioPago={row?.pagos[row?.pagos.length-1]?.medio_de_pago} 
                             montoPago={row?.pagos[row?.pagos.length-1]?.monto} 
                             />
-                            {/* {console.log("pago", members[0]?.pagos[members[0]?.pagos.length-1])} */}
                             </div>
-                        </Modal>
-                        <Modal
-                            btnA={ 
-                                <button className="btn btn-outline-light btn-sm d-flex align-items-center" title="Registrar pago">
-                                    <RiMoneyDollarCircleFill size={20}/>
-                                </button>
-                                }
-                            id={row._id+"pago"}
-                        >
-                            <div className='flex flex-col gap-5'>
-                            <h3 className='font-bold text-lg'>Cargar Pago</h3>
-                            <FormCreatePayment id={row._id}  />
-                            </div>
-                        </Modal>
+                        </Modal> */}
                   </div>
               )
           },
           center: "true",
-          minWidth: "250px"
       }
       ];
 
@@ -167,7 +159,7 @@ const MembersTable = () => {
             
             <DataTable
                 columns={columns}
-                data={filteredMembers}
+                data={filteredPayments}
                 pagination
                 highlightOnHover
                 pointerOnHover
@@ -180,4 +172,4 @@ const MembersTable = () => {
   )
 }
 
-export default MembersTable
+export default PaymentsTable

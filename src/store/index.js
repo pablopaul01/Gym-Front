@@ -2,33 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import UserSlice from './UserSlice'
 import MemberSlice from './MemberSlice'
 import ProgramSlice from './ProgramSlice'
-// import AccountSlice from './AccountSlice'
-// import RoomSlice from './RoomSlice'
-// import ThemeSlice from './ThemeSlice'
-// import ParticipantSlice from './ParticipantSlice'
-// import idReducer from './CurrentIdSlice'
-// import DebtSlice from './DebtSlice'
-// import PurchaseSlice from './PurchaseSlice'
-// import { logout as accountLogout } from './AccountSlice'
-// import { logout as roomLogout } from './RoomSlice'
-// import { logout as themeLogout } from './ThemeSlice'
-// import { logout as participantLogout } from './ParticipantSlice'
-// import { logout as idLogout } from './CurrentIdSlice'
-// import { logout as debtLogout } from './DebtSlice'
-// import { logout as purchaseLogout } from './PurchaseSlice'
+import PaymentsSlice from './PaymentsSlice'
 
 const store = configureStore({
   reducer: {
     users: UserSlice,
     members: MemberSlice,
     programs: ProgramSlice,
-    // account: AccountSlice,
-    // room: RoomSlice,
-    // theme: ThemeSlice,
-    // participant: ParticipantSlice,
-    // currentId: idReducer,
-    // debts: DebtSlice,
-    // purchase: PurchaseSlice,
+    payments: PaymentsSlice
   },
 })
 

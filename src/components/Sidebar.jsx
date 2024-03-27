@@ -34,7 +34,7 @@ const Sidebar = ({isLogged, setIsLogged}) => {
                         <li><NavLink to={'/members'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Alumnos</NavLink></li>
                         <li><NavLink to={'/programs'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Programas</NavLink></li>
                         <li><NavLink to={'/expirations'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Vencimientos</NavLink></li>
-                        <li><NavLink to={'/favorites/'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Pagos</NavLink></li>
+                        <li><NavLink to={'/payments'} className={location.pathname === '/favorites/' ? 'text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Pagos</NavLink></li>
                         </>
                     )
                 }
