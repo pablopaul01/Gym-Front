@@ -45,34 +45,50 @@ const FormCreateUser = () => {
       className=" flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaUser className="w-4 h-4 opacity-70" />
-        <input
-          type="text"
-          className="grow"
-          placeholder="Nombre"
-          name="name"
-          {...register("name")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaUser className="w-4 h-4 opacity-70" />
-        <input
-          type="text"
-          className="grow"
-          placeholder="Apellido"
-          name="lastname"
-          {...register("lastname")}
-          maxLength={40}
-        />
-      </label>
+      <div>
+        <label
+          className="input input-bordered flex items-center gap-2"
+          data-theme="light"
+        >
+          <FaUser className="w-4 h-4 opacity-70" />
+          <input
+            type="text"
+            className="grow"
+            placeholder="Nombre"
+            name="name"
+            required
+            {...register("name")}
+            maxLength={40}
+          />
+        </label>
+        {
+          errors.name?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.name?.message}</p>
+          )
+        }
+      </div>
+      <div>
+        <label
+          className="input input-bordered flex items-center gap-2"
+          data-theme="light"
+        >
+          <FaUser className="w-4 h-4 opacity-70" />
+          <input
+            type="text"
+            className="grow"
+            placeholder="Apellido"
+            required
+            name="lastname"
+            {...register("lastname")}
+            maxLength={40}
+          />
+        </label>
+        {
+          errors.lastname?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.lastname?.message}</p>
+          )
+        }
+      </div>
       <div>
         <label
           className="input input-bordered flex items-center gap-2"
@@ -91,6 +107,7 @@ const FormCreateUser = () => {
             type="email"
             className="grow"
             placeholder="Email"
+            required
             name="email"
             {...register("email")}
             maxLength={40}

@@ -6,7 +6,6 @@ import { toast } from 'sonner'
 import { FaUser } from "react-icons/fa6";
 import { useDispatch } from 'react-redux'
 import { axiosInstance } from '../config/axiosInstance'
-import { FaMoneyCheckAlt } from "react-icons/fa";
 import { getPrograms } from '../store/ProgramSlice'
 import { PROGRAM_SCHEMA } from '../helpers/validationSchemas'
 import { RiMoneyDollarCircleFill } from 'react-icons/ri'
@@ -40,7 +39,7 @@ const FormCreateProgram = () => {
       className="mt-5 flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className='flex gap-2'>
+      <div className='flex flex-col gap-5'>
         <div className='w-50'>
           <label
             className="input input-bordered flex items-center gap-2"
@@ -56,6 +55,11 @@ const FormCreateProgram = () => {
               maxLength={40}
             />
           </label>
+          {
+          errors.name?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.name?.message}</p>
+          )
+          }
         </div>
         <div className='w-50'>
           <label
@@ -73,6 +77,11 @@ const FormCreateProgram = () => {
               maxLength={40}
             />
           </label>
+        {
+          errors.price?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.price?.message}</p>
+          )
+        }
         </div>
       </div>
       

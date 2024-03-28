@@ -5,21 +5,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
 import { axiosInstance } from '../config/axiosInstance'
-import { FaWhatsapp } from "react-icons/fa";
-import { RiHealthBookLine } from "react-icons/ri";
-import { getMembers } from '../store/MemberSlice'
-import { MEMBER_SCHEMA } from '../helpers/validationSchemas'
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { RiBankFill } from "react-icons/ri";
 import moment from 'moment'
 import { getPayments } from '../store/PaymentsSlice'
+import { REGISTERPAYMENT_SCHEMA } from '../helpers/validationSchemas'
 
 const FormCreatePayment = ({id}) => {
     const [loading, setLoading] = useState(false);
     const [comprobante, setComprobante] = useState(null);
 
     const dispatch = useDispatch()
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+      resolver: yupResolver(REGISTERPAYMENT_SCHEMA)
+  })
 
     const onSubmit = async (data) => {
         try {
@@ -64,7 +63,7 @@ const FormCreatePayment = ({id}) => {
       className="mt-5 flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className='flex gap-2'>
+      <div className='flex flex-col gap-5'>
         <div className='w-50'>
           <label
             className="input input-bordered flex items-center gap-2"
@@ -74,15 +73,22 @@ const FormCreatePayment = ({id}) => {
               type="date"
               className="w-full"
               placeholder="Fecha de Pago"
+              required
               name="fecha"
               {...register("fecha")}
               maxLength={40}
             />
-          </label>
+          </label> 
+          {errors.fecha?.message && console.log(errors.fecha?.message)}
+          {
+          errors.fecha?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.fecha?.message}</p>
+          )
+        }
         </div>
         <div className='w-50'>
           <label
-            className="input input-bordered flex items-center gap-2"
+            className="input input-bordered flex items-center gap-2 w-50"
             data-theme="light"
           >
             <RiMoneyDollarCircleLine  className="w-6 h-6 opacity-70" />
@@ -90,12 +96,18 @@ const FormCreatePayment = ({id}) => {
               type="number"
               className="w-full"
               placeholder="Monto"
+              required
               name="monto"
               {...register("monto")}
               maxLength={40}
               min={0}
             />
           </label>
+          {
+          errors.monto?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.monto?.message}</p>
+          )
+        }
         </div>
       </div>
       <label
@@ -103,7 +115,7 @@ const FormCreatePayment = ({id}) => {
         data-theme="light"
       >
         <RiBankFill className="w-6 h-6 opacity-70"/>
-        <select name="" id="" {...register("medio")} className='w-full'>
+        <select name="" id="" {...register("medio")} className='w-full' required>
           <option value="0">Seleccione medio de pago</option>
           <option value="Transferencia">Transferencia</option>
           <option value="Efectivo">Efectivo</option>

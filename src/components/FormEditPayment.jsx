@@ -5,21 +5,22 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
 import { axiosInstance } from '../config/axiosInstance'
-import { FaWhatsapp } from "react-icons/fa";
-import { RiHealthBookLine } from "react-icons/ri";
-import { getMembers } from '../store/MemberSlice'
-import { MEMBER_SCHEMA } from '../helpers/validationSchemas'
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { RiBankFill } from "react-icons/ri";
 import moment from 'moment'
 import { getPayments } from '../store/PaymentsSlice'
+import { REGISTERPAYMENT_SCHEMA } from '../helpers/validationSchemas'
 
 const FormEditPayment = ({id, fecha_de_pago, monto, medio_de_pago}) => {
     const [loading, setLoading] = useState(false);
     const [comprobante, setComprobante] = useState(null);
 
     const dispatch = useDispatch()
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+      resolver: yupResolver(
+        REGISTERPAYMENT_SCHEMA
+      )
+    })
 
     const onSubmit = async (data) => {
         try {
@@ -62,6 +63,11 @@ const FormEditPayment = ({id, fecha_de_pago, monto, medio_de_pago}) => {
               maxLength={40}
             />
           </label>
+          {
+          errors.fecha?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.fecha?.message}</p>
+          )
+          }
         </div>
         <div className='w-50'>
           <label
@@ -81,6 +87,11 @@ const FormEditPayment = ({id, fecha_de_pago, monto, medio_de_pago}) => {
             />
           </label>
         </div>
+        {
+          errors.monto?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.monto?.message}</p>
+          )
+        }
       </div>
       <label
         className="input input-bordered flex items-center gap-2"

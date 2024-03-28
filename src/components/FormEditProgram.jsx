@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { PROGRAMEDIT_SCHEMA } from '../helpers/validationSchemas'
 import { getPrograms } from '../store/ProgramSlice'
+import { RiMoneyDollarCircleFill } from 'react-icons/ri'
 
 
 
@@ -50,7 +51,7 @@ const FormEditProgram = ({id, name, price}) => {
       className="mt-5 flex flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className='flex gap-2'>
+      <div className='flex flex-col gap-5'>
         <div className='w-50'>
           <label
             className="input input-bordered flex items-center gap-2"
@@ -73,7 +74,7 @@ const FormEditProgram = ({id, name, price}) => {
           className="input input-bordered flex items-center gap-2"
           data-theme="light"
         >
-          <FaMoneyCheckAlt className="w-4 h-4 opacity-70"/>
+          <RiMoneyDollarCircleFill className="w-6 h-6 opacity-70"/>
           <input
             type="number"
             className="w-full"

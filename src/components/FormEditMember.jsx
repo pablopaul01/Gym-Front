@@ -69,6 +69,11 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
               maxLength={40}
             />
           </label>
+          {
+          errors.name?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.name?.message}</p>
+          )
+        }
         </div>
         <div className='w-50'>
         <label
@@ -86,6 +91,11 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
             maxLength={40}
           />
         </label>
+        {
+          errors.lastname?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.lastname?.message}</p>
+          )
+        }
         </div>
       </div>
       <div className='flex gap-2'>
@@ -103,8 +113,15 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
               name="dni"
               {...register("dni")}
               maxLength={40}
+              min={0}
+              required
             />
           </label>
+          {
+          errors.dni?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.dni?.message}</p>
+          )
+        }
         </div>
         <div className='w-50'>
           <label
@@ -120,8 +137,14 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
               name="whatsapp"
               {...register("whatsapp")}
               maxLength={40}
+              required
             />
           </label>
+          {
+          errors.whatsapp?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.whatsapp?.message}</p>
+          )
+        }
         </div>
       </div>
       <div className="flex gap-2">
@@ -136,11 +159,17 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
               className="grow w-full"
               placeholder="Obra social"
               defaultValue={obraSocial}
+              required
               name="obraSocial"
               {...register("obraSocial")}
               maxLength={40}
             />
           </label>
+          {
+          errors.obraSocial?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.obraSocial?.message}</p>
+          )
+        }
         </div>
         <div className="w-50">
           <label

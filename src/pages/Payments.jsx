@@ -21,19 +21,7 @@ const Payments = ({isLogged, setIsLogged}) => {
     <DashBoardLayout isLogged={isLogged} setIsLogged={setIsLogged}>
 
     <div className='min-h-[100vh] bg-slate-100 flex justify-center w-full flex flex-col px-20 gap-5 items-start'>
-    <div className='flex justify-start items-center mt-10'>
-        <Modal
-                btnA={<ActionButton value={`Cargar pago`}  width={"w-full"}/>}
-                id={1}
-              >
-                <div className='flex flex-col'>
-                  <h3 className='font-bold text-xl text-black'>Cargar Pago</h3>
-                  <div className='modal-action' method='dialog'>
-                    <FormCreatePayment />
-                  </div>
-                </div>
-        </Modal>
-    </div>    
+   
       <PaymentsTable />
     </div>
     </DashBoardLayout>

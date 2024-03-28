@@ -52,11 +52,17 @@ const FormCreateMember = () => {
               type="text"
               className="w-full"
               placeholder="Nombre"
+              required
               name="name"
               {...register("name")}
               maxLength={40}
             />
           </label>
+          {
+          errors.name?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.name?.message}</p>
+          )
+        }
         </div>
         <div className='w-50'>
           <label
@@ -69,54 +75,84 @@ const FormCreateMember = () => {
               className="w-full"
               placeholder="Apellido"
               name="lastname"
+              required
               {...register("lastname")}
               maxLength={40}
             />
           </label>
+          {
+          errors.lastname?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.lastname?.message}</p>
+          )
+        }
         </div>
       </div>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <PiIdentificationCardLight className="w-4 h-4 opacity-70"/>
-        <input
-          type="number"
-          className="grow"
-          placeholder="DNI"
-          name="dni"
-          {...register("dni")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <FaWhatsapp className="w-4 h-4 opacity-70"/>
-        <input
-          type="number"
-          className="grow"
-          placeholder="Whatsapp"
-          name="whatsapp"
-          {...register("whatsapp")}
-          maxLength={40}
-        />
-      </label>
-      <label
-        className="input input-bordered flex items-center gap-2"
-        data-theme="light"
-      >
-        <RiHealthBookLine className="w-4 h-4 opacity-70"/>
-        <input
-          type="text"
-          className="grow"
-          placeholder="Obra social"
-          name="obraSocial"
-          {...register("obraSocial")}
-          maxLength={40}
-        />
-      </label>
+      <div>
+        <label
+          className="input input-bordered flex items-center gap-2"
+          data-theme="light"
+        >
+          <PiIdentificationCardLight className="w-4 h-4 opacity-70"/>
+          <input
+            type="number"
+            className="grow"
+            placeholder="DNI"
+            required
+            name="dni"
+            {...register("dni")}
+            maxLength={40}
+          />
+        </label>
+        {
+          errors.dni?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.dni?.message}</p>
+          )
+        }
+      </div>
+      <div>
+        <label
+          className="input input-bordered flex items-center gap-2"
+          data-theme="light"
+        >
+          <FaWhatsapp className="w-4 h-4 opacity-70"/>
+          <input
+            type="number"
+            className="grow"
+            required
+            placeholder="Whatsapp"
+            name="whatsapp"
+            {...register("whatsapp")}
+            maxLength={40}
+          />
+        </label>
+        {
+          errors.whatsapp?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.whatsapp?.message}</p>
+          )
+        }
+      </div>
+      <div>
+        <label
+          className="input input-bordered flex items-center gap-2"
+          data-theme="light"
+        >
+          <RiHealthBookLine className="w-4 h-4 opacity-70"/>
+          <input
+            type="text"
+            className="grow"
+            placeholder="Obra social"
+            name="obraSocial"
+            required
+            {...register("obraSocial")}
+            maxLength={40}
+          />
+        </label>
+        {
+          errors.obraSocial?.message && (
+            <p className="text-red-600 my-0 text-center">{errors.obraSocial?.message}</p>
+          )
+        }
+      </div>
       {loading ? (
         <div className="flex mt-3 justify-center mt-4 mb-3">
           <span className="loading loading-bars loading-lg"></span>
