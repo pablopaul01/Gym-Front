@@ -198,7 +198,7 @@ const FormCreateUser = () => {
         </div>
       ) : (
         <div className="d-grid mt-4 mb-4">
-          <ActionButton value={"Crear cuenta"} type="submit" />
+          <ActionButton value={"Crear cuenta"} type="submit" width={"w-full"}/>
         </div>
       )}
     </form>

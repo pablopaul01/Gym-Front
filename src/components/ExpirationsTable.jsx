@@ -70,7 +70,7 @@ const ExpirationsTable = ({members}) => {
           name: 'Inicio de ciclo',
           selector: row => 
           <div className='flex justify-center items-center'>
-            {moment.utc(row.fecha_inicio_ciclo).format('DD/MM/YYYY')} 
+            {moment(row.fecha_inicio_ciclo).format('DD/MM/YYYY')} 
             <Modal
                       btnA={ 
                           <button className="btn btn-ghost btn-sm d-flex align-items-center" title="Editar inicio de ciclo">
@@ -92,7 +92,7 @@ const ExpirationsTable = ({members}) => {
           name: 'Vencimiento',
           selector: row => 
             <div className='flex justify-center items-center'>
-              {moment.utc(row.proximo_vencimiento).format('DD/MM/YYYY')}
+              {moment(row.proximo_vencimiento).format('DD/MM/YYYY')}
                   <Modal
                       btnA={ 
                           <button className="btn btn-ghost btn-sm d-flex align-items-center" title="Editar Vencimiento">
@@ -111,10 +111,9 @@ const ExpirationsTable = ({members}) => {
           center: "true",
         },
       ];
-
       const conditionalRowStyles = [
         {
-          when: row => moment.utc(row.proximo_vencimiento).isBefore(moment().utc()),
+          when: row => moment(row.proximo_vencimiento).isBefore(moment()),
           style: {
             backgroundColor: 'rgba(242, 38, 19, 0.9)', // Rojo
             color: 'white',
@@ -126,7 +125,7 @@ const ExpirationsTable = ({members}) => {
         {
           when: row => moment(row.proximo_vencimiento).isBetween(
             moment().startOf('day'), 
-            moment().utc().add(5, 'days').endOf('day')
+            moment().add(5, 'days').endOf('day')
           ),
           style: {
             backgroundColor: 'rgba(255, 235, 59, 0.9)', // Amarillo
@@ -137,7 +136,7 @@ const ExpirationsTable = ({members}) => {
           },
         },
         {
-          when: row => moment.utc(row.proximo_vencimiento).isAfter(moment().utc().add(5, 'days').endOf('day')),
+          when: row => moment(row.proximo_vencimiento).isAfter(moment().add(5, 'days').endOf('day')),
           style: {
             backgroundColor: 'rgba(63, 195, 128, 0.9)', // Verde
             color: 'white',

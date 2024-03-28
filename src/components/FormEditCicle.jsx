@@ -26,6 +26,13 @@ const FormEditCicle = ({id, vencimiento}) => {
     const onSubmit = async (data) => {
         try {
             setLoading(true);
+            console.log("fecha", data.inicioCiclo)
+            // Obtener la fecha seleccionada en el input date
+            const fechaSeleccionada = moment(data.inicioCiclo);
+            // Convertir la fecha a la zona horaria de Argentina (GMT-0300) y establecer la hora a las 23:59
+            const fechaArgentina = fechaSeleccionada.utcOffset(-180).format('YYYY-MM-DDTHH:mm:ssZ');
+            // Actualizar el valor de la fecha en los datos a enviar
+            data.inicioCiclo = fechaArgentina;
             const response = await axiosInstance.put(`/alumno/inicioCiclo/${id}`, data)
             toast.success("Fecha actualizada correctamente!",{position:"top-right"});
             dispatch(getMembers())

@@ -11,7 +11,9 @@ import { FaMoneyCheckAlt } from "react-icons/fa";
 import { PROGRAMEDIT_SCHEMA } from '../helpers/validationSchemas'
 import { getPrograms } from '../store/ProgramSlice'
 import { getMembers } from '../store/MemberSlice'
-import moment from 'moment'
+import moment from 'moment';
+import 'moment-timezone';
+
 
 
 const FormEditExpiration = ({id, vencimiento}) => {
@@ -26,6 +28,13 @@ const FormEditExpiration = ({id, vencimiento}) => {
     const onSubmit = async (data) => {
         try {
             setLoading(true);
+            console.log("fecha", data.vencimiento)
+            // Obtener la fecha seleccionada en el input date
+            const fechaSeleccionada = moment(data.vencimiento);
+            // Convertir la fecha a la zona horaria de Argentina (GMT-0300) y establecer la hora a las 23:59
+            const fechaArgentina = fechaSeleccionada.utcOffset(-180).endOf('day').format('YYYY-MM-DDTHH:mm:ssZ');
+            // Actualizar el valor de la fecha en los datos a enviar
+            data.vencimiento = fechaArgentina;
             const response = await axiosInstance.put(`/alumno/vencimiento/${id}`, data)
             toast.success("Vencimiento actualizado correctamente!",{position:"top-right"});
             dispatch(getMembers())

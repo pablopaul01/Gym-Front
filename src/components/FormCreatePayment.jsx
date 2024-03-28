@@ -11,6 +11,7 @@ import { getMembers } from '../store/MemberSlice'
 import { MEMBER_SCHEMA } from '../helpers/validationSchemas'
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { RiBankFill } from "react-icons/ri";
+import moment from 'moment'
 
 const FormCreatePayment = ({id}) => {
     const [loading, setLoading] = useState(false);
@@ -23,9 +24,16 @@ const FormCreatePayment = ({id}) => {
         try {
             setLoading(true);
             data.alumno = id;
+            console.log("fecha", data.fecha)
+            // Obtener la fecha seleccionada en el input date
+            const fechaSeleccionada = moment(data.fecha);
+            // Convertir la fecha a la zona horaria de Argentina (GMT-0300) y establecer la hora a las 23:59
+            const fechaArgentina = fechaSeleccionada.utcOffset(-180).format('YYYY-MM-DDTHH:mm:ssZ');
+            // Actualizar el valor de la fecha en los datos a enviar
+            data.fecha = fechaArgentina;
             const formData = new FormData();
             formData.append('comprobante', comprobante);
-            formData.append('fecha_de_pago', data.fecha_de_pago);
+            formData.append('fecha', data.fecha);
             formData.append('monto', data.monto);
             formData.append('medio', data.medio);
             formData.append('alumno', data.alumno);
@@ -66,8 +74,8 @@ const FormCreatePayment = ({id}) => {
               type="date"
               className="w-full"
               placeholder="Fecha de Pago"
-              name="fecha_de_pago"
-              {...register("fecha_de_pago")}
+              name="fecha"
+              {...register("fecha")}
               maxLength={40}
             />
           </label>
@@ -110,6 +118,7 @@ const FormCreatePayment = ({id}) => {
             name="comprobante"
             onChange={handleFileChange}
             className="file-input w-full max-w-xs"
+            data-theme="light"
         />
       </div>
       {loading ? (
@@ -118,7 +127,7 @@ const FormCreatePayment = ({id}) => {
         </div>
       ) : (
         <div className="d-grid mt-4 mb-4">
-          <ActionButton value={"Cargar Pago"} type="submit" />
+          <ActionButton value={"Cargar Pago"} type="submit" width={"w-full"}/>
         </div>
       )}
     </form>

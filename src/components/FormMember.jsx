@@ -20,10 +20,16 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
         document.getElementById(`modal_${id+"data"}`).close()
     }
 
+
+    const handleclick = (e) => {
+      
+      console.log(ultimoPago)
+    }
   return (
     <form
       className="mt-5 flex flex-col gap-5"
       >
+        <div onClick={handleclick}>ver</div>
       <div className='flex gap-2'>
         <div className='w-50'>
           <label
@@ -127,7 +133,7 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
               <input
                 type="date"
                 className="grow text-center"
-                value={moment.utc(proximo_vencimiento).format('YYYY-MM-DD')}
+                value={moment(proximo_vencimiento).format('YYYY-MM-DD')}
                 name="vencimiento"
                 maxLength={40}
                 readOnly

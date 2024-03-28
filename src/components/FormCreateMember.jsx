@@ -123,7 +123,7 @@ const FormCreateMember = () => {
         </div>
       ) : (
         <div className="d-grid mt-4 mb-4">
-          <ActionButton value={"Cargar Alumno"} type="submit" />
+          <ActionButton value={"Cargar Alumno"} type="submit" width={"w-full"}/>
         </div>
       )}
     </form>

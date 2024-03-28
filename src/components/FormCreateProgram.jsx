@@ -9,6 +9,7 @@ import { axiosInstance } from '../config/axiosInstance'
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { getPrograms } from '../store/ProgramSlice'
 import { PROGRAM_SCHEMA } from '../helpers/validationSchemas'
+import { RiMoneyDollarCircleFill } from 'react-icons/ri'
 
 const FormCreateProgram = () => {
     const [loading, setLoading] = useState(false);
@@ -61,7 +62,7 @@ const FormCreateProgram = () => {
             className="input input-bordered flex items-center gap-2"
             data-theme="light"
           >
-            <FaMoneyCheckAlt className="w-4 h-4 opacity-70"/>
+            <RiMoneyDollarCircleFill className="w-6 h-6 opacity-70"/>
             <input
               type="number"
               className="w-full"
@@ -81,7 +82,7 @@ const FormCreateProgram = () => {
         </div>
       ) : (
         <div className="d-grid mt-4 mb-4">
-          <ActionButton value={"Guardar programa"} type="submit" />
+          <ActionButton value={"Guardar programa"} type="submit" width={"w-full"}/>
         </div>
       )}
     </form>
