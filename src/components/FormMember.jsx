@@ -29,7 +29,6 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
     <form
       className="mt-5 flex flex-col gap-5"
       >
-        <div onClick={handleclick}>ver</div>
       <div className='flex gap-2'>
         <div className='w-50'>
           <label
@@ -152,7 +151,7 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
               <input
                 type="text"
                 className="grow text-center"
-                value={`${moment(ultimoPago).format('DD/MM/YYYY')} - ${medioPago} - $ ${montoPago}`}
+                value={medioPago?`${moment(ultimoPago).format('DD/MM/YYYY')} - ${medioPago} - $ ${montoPago}` : "No hay pagos registrados"}
                 name="vencimiento"
                 maxLength={40}
                 readOnly
