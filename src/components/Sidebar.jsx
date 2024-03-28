@@ -81,7 +81,7 @@ const Sidebar = ({isLogged, setIsLogged}) => {
                         {
                             isLogged ? 
                             (
-                                <Link to={'/login'} onClick={handleLogout} className='hover:text-[#16b187] mt-20'>Cerrar Sesión</Link>
+                                <Link to={'/'} onClick={handleLogout} className='hover:text-[#16b187] mt-20'>Cerrar Sesión</Link>
                             ) 
                             : 
                             (

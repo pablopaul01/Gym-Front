@@ -24,7 +24,7 @@ const LoginForm = ({setIsLogged}) => {
             setLoading(true);
             const response = await axiosInstance.post("/login", data)
             localStorage.setItem("token", response.data.token);
-            navigate("/main");
+            navigate("/members");
             toast.success("Bienvenido!",{position:"top-right"});
             setIsLogged(true)
         } catch (error) {

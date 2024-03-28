@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../store/UserSlice';
 import Modal from './Modal';
 import FormEditUser from './FormEditUser';
+import { jwtDecode } from 'jwt-decode';
 
 
 const UsersTable = () => {
@@ -22,6 +23,16 @@ const UsersTable = () => {
         dispatch(getUsers())
         setPending(false)
     }, [])
+    
+    const checkUserLogin = (id) =>{
+      const decode = jwtDecode(localStorage.getItem("token"))
+      if(decode.sub === id){
+        return true
+      }
+      else {
+        return false
+      }
+    }
     
     const columns = [
         {
@@ -82,6 +93,10 @@ const UsersTable = () => {
     };
 
     const handleDelete = async (id) => {
+      if (checkUserLogin(id)) {
+        toast.error("No puedes eliminar a ti mismo!",{position:"top-right"});
+      }
+      else{
         try {
             await axiosInstance.delete(`/usuario/${id}`)
             toast.success("Usuario eliminado correctamente!",{position:"top-right"});
@@ -91,6 +106,7 @@ const UsersTable = () => {
         } finally {
 
         }
+      }
     }
 
   return (
