@@ -14,6 +14,7 @@ import { getPrograms } from "../store/ProgramSlice";
 import { getPayments } from "../store/PaymentsSlice";
 import moment from "moment";
 import ActionButton from "./ActionButton";
+import FormEditPayment from "./FormEditPayment";
 
 const PaymentsTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -98,18 +99,15 @@ const PaymentsTable = () => {
                   <FaRegEdit className="t-1" />
                 </button>
               }
-              id={row._id + 1}
+              id={row._id + "editPayment"}
             >
               <div className="flex flex-col gap-5">
-                <h3 className="font-bold text-lg">Editar Alumno</h3>
-                <FormEditMember
+                <h3 className="font-bold text-lg">Editar Pago</h3>
+                <FormEditPayment
                   id={row._id}
-                  name={row.name}
-                  lastname={row.lastname}
-                  dni={row.dni}
-                  whatsapp={row.whatsapp}
-                  obraSocial={row.obraSocial}
-                  programa={row.clases?._id}
+                  fecha_de_pago={row.fecha_de_pago}
+                  monto={row.monto}
+                  medio_de_pago={row.medio_de_pago}
                 />
               </div>
             </Modal>
@@ -182,7 +180,7 @@ const PaymentsTable = () => {
       data-theme="light"
     >
 
-      <div className="flex gap-2 justify-between items-end mb-10">
+      <div className="flex gap-2 justify-between items-end mb-10 px-5">
         <input
           type="text"
           placeholder="Buscar por nombre o apellido"

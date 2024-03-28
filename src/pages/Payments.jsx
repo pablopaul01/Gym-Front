@@ -20,8 +20,8 @@ const Payments = ({isLogged, setIsLogged}) => {
   return (
     <DashBoardLayout isLogged={isLogged} setIsLogged={setIsLogged}>
 
-    <div className='h-[100vh] bg-slate-100 flex justify-center w-full flex flex-col px-20 gap-5 items-start'>
-    <div className='flex justify-start items-center'>
+    <div className='min-h-[100vh] bg-slate-100 flex justify-center w-full flex flex-col px-20 gap-5 items-start'>
+    <div className='flex justify-start items-center mt-10'>
         <Modal
                 btnA={<ActionButton value={`Cargar pago`}  width={"w-full"}/>}
                 id={1}
