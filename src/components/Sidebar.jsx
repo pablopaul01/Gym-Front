@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
-import { FaDumbbell, FaUserCircle, FaUsers } from 'react-icons/fa'
+import { FaChartBar, FaDumbbell, FaUserCircle, FaUsers } from 'react-icons/fa'
 import { IoCalendarNumber } from "react-icons/io5";
 import { IoMdEye } from 'react-icons/io';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
@@ -34,6 +34,14 @@ const Sidebar = ({isLogged, setIsLogged}) => {
             {
                     isLogged && (
                         <div className='ps-3'>
+                            <div className='flex items-center cursor-pointer '>
+                                <div className='w-5'>
+                                    <FaChartBar className='h-5 w-5'/>
+                                </div>
+                                <div>
+                                    <li><NavLink to={'/main'} className={location.pathname === '/books' ? ' text-[#16b187] focus:text-[#16b187] hover:text-[#16b187]' : 'focus:text-white hover:text-[#16b187]'}>Reportes</NavLink></li>
+                                </div>
+                            </div>
                             <div className='flex items-center cursor-pointer '>
                                 <div className='w-5'>
                                     <FaUserCircle className='h-5 w-5'/>

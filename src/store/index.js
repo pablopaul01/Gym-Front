@@ -3,13 +3,19 @@ import UserSlice from './UserSlice'
 import MemberSlice from './MemberSlice'
 import ProgramSlice from './ProgramSlice'
 import PaymentsSlice from './PaymentsSlice'
+import MonthlyPaymentsSlice from './MonthlyPaymentsSlice'
+import MonthlyPaymentsMethodSlice from './MonthlyPaymentsMethodSlice'
+import MembersStats from './MembersStats'
 
 const store = configureStore({
   reducer: {
     users: UserSlice,
     members: MemberSlice,
     programs: ProgramSlice,
-    payments: PaymentsSlice
+    payments: PaymentsSlice,
+    monthlyPayments: MonthlyPaymentsSlice,
+    monthlyPaymentsMethod: MonthlyPaymentsMethodSlice,
+    alumnosStats: MembersStats
   },
 })
 
