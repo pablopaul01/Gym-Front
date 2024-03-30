@@ -27,7 +27,8 @@ const ExpirationsTable = ({members}) => {
           members.filter(
               (member) =>
                   member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  member.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+                  member.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  member.clases?.name.toLowerCase().includes(searchTerm.toLowerCase())
           )
       );
   }, [searchTerm, members]);
@@ -157,14 +158,17 @@ const ExpirationsTable = ({members}) => {
 
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
+      <div className='flex w-full'>
+
                         <input
                 type="text"
-                placeholder="Buscar por nombre o apellido"
+                placeholder="Buscar por nombre o apellido o programa"
                 value={searchTerm}
                 onChange={handleSearch}
-                className="input input-bordered mb-5 w-full max-w-xs"
+                className="input input-bordered mb-5 w-[60%]"
                 
             />
+      </div>
       {estado.isLoading ? 
       (
         <div className="flex mt-3 justify-center mt-4 mb-3">

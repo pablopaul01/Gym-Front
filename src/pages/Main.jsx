@@ -29,6 +29,17 @@ const Main = ({isLogged, setIsLogged}) => {
   return (
     <DashBoardLayout isLogged={isLogged} setIsLogged={setIsLogged}>
       <div className='min-h-[800px] h-[100vh] bg-slate-100 flex flex-col justify-center items-center w-full gap-10'>
+      {
+        alumnosStats.isLoading ?
+        (
+          <div className="flex mt-3 justify-center mt-4 mb-3">
+            <span className="loading loading-bars loading-lg"></span>
+          </div>
+        )
+          :
+        (
+
+        <>
         <div className='flex gap-3'>
           <div className='card bg-white shadow-xl p-4 w-[300px]'>
             <h3 className='mb-3 mt-2 text-center text-black font-bold flex justify-center gap-2 items-center'><RiMoneyDollarCircleFill className='h-5 w-5'/>PAGOS</h3>
@@ -102,6 +113,10 @@ const Main = ({isLogged, setIsLogged}) => {
               )
             }
         </div>
+        </>
+        )
+
+      }
       </div>
     </DashBoardLayout>
   )
