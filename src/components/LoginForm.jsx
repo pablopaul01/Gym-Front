@@ -78,14 +78,10 @@ const LoginForm = ({setIsLogged}) => {
                         :
                         (
                         <div className="d-grid mt-10 mb-4">
-                            <ActionButton value={'Iniciar Sesión'} type="submit" />
+                            <ActionButton value={'Iniciar Sesión'} type="submit" width={"w-full"}/>
                         </div>
                         )
                     }
-                <div className="mt-3 text-center text-sm" id="btn-registro">
-                <span>¿No tienes una cuenta registrada?
-                    <Link to="/register" > Regístrate</Link></span>
-                </div>
                 <div className="text-center font-bold text-sm">
                     <Link to="/recover" className=" mb-4">¿Olvidaste tu contraseña?</Link>
                 </div>

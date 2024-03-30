@@ -8,6 +8,7 @@ import Members from './pages/Members'
 import Expirations from './pages/Expirations'
 import Programs from './pages/Programs'
 import Payments from './pages/Payments'
+import PrivateRoutes from './routes/PrivateRoutes'
 
 function App() {
   const [isLogged, setIsLogged] = useState(()=>{
@@ -20,13 +21,15 @@ function App() {
     <>
       <Toaster richColors/>
       <Routes>
-        <Route path='/' element={<Login setIsLogged={setIsLogged}/>}/>
-        <Route path='/main' element={<Main isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/users' element={<Users isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/members' element={<Members isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/expirations' element={<Expirations isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/programs' element={<Programs isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
-        <Route path='/payments' element={<Payments isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+          <Route path='/' element={<Login setIsLogged={setIsLogged}/>}/>
+        <Route element={<PrivateRoutes/>}>
+          <Route path='/main' element={<Main isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+          <Route path='/users' element={<Users isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+          <Route path='/members' element={<Members isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+          <Route path='/expirations' element={<Expirations isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+          <Route path='/programs' element={<Programs isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+          <Route path='/payments' element={<Payments isLogged={isLogged} setIsLogged={setIsLogged}/>}/>
+        </Route>
       </Routes>
     </>
   )
