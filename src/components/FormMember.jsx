@@ -21,10 +21,6 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
     }
 
 
-    const handleclick = (e) => {
-      
-      console.log(ultimoPago)
-    }
   return (
     <form
       className="mt-5 flex flex-col gap-5"

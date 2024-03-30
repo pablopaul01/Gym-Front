@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import CardUser from '../components/CardUser'
-import LoginForm from '../components/LoginForm'
+import ResetForm from '../components/ResetForm'
 
-const Login = ({setIsLogged}) => {
+const ResetPass = () => {
   return (
     <div className='flex min-h-[800px] h-[100vh] bg-slate-100 flex justify-center items-center'>
       <div className='w-[70%] flex justify-center'>
         <div className='w-[40%]'>
-          <CardUser title={"Iniciar Sesión"} subTitle={"Ingrese su correo para iniciar sesión"} className="w-[50%]">
-              <LoginForm setIsLogged={setIsLogged}/>
+          <CardUser title={"Recuperar contraseña"} subTitle={"Ingrese el correo electrónico de la cuenta que desea recuperar contraseña"} className="w-[50%]">
+               <ResetForm />
           </CardUser>
         </div>
       </div>
@@ -29,4 +29,4 @@ const Login = ({setIsLogged}) => {
   )
 }
 
-export default Login
+export default ResetPass

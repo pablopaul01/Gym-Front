@@ -24,7 +24,6 @@ const FormCreatePayment = ({id}) => {
         try {
             setLoading(true);
             data.alumno = id;
-            console.log("fecha", data.fecha)
             // Obtener la fecha seleccionada en el input date
             const fechaSeleccionada = moment(data.fecha);
             // Convertir la fecha a la zona horaria de Argentina (GMT-0300) y establecer la hora a las 23:59

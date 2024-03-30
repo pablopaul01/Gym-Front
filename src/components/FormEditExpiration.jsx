@@ -28,7 +28,6 @@ const FormEditExpiration = ({id, vencimiento}) => {
     const onSubmit = async (data) => {
         try {
             setLoading(true);
-            console.log("fecha", data.vencimiento)
             // Obtener la fecha seleccionada en el input date
             const fechaSeleccionada = moment(data.vencimiento);
             // Convertir la fecha a la zona horaria de Argentina (GMT-0300) y establecer la hora a las 23:59

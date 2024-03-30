@@ -99,7 +99,6 @@ const MembersTable = () => {
                             medioPago={row?.pagos[row?.pagos.length-1]?.medio_de_pago} 
                             montoPago={row?.pagos[row?.pagos.length-1]?.monto} 
                             />
-                            {/* {console.log("pago", members[0]?.pagos[members[0]?.pagos.length-1])} */}
                             </div>
                         </Modal>
                         <Modal
