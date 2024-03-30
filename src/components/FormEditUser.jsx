@@ -9,6 +9,7 @@ import { getUsers } from '../store/UserSlice'
 import { axiosInstance } from '../config/axiosInstance'
 import { useDispatch, useSelector } from 'react-redux';
 import { EDITUSER_SCHEMA } from '../helpers/validationSchemas'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const FormEditUser = ({id, name, lastname, email}) => {
     const [showPassword, setShowPassword] = useState(false)
@@ -118,6 +119,100 @@ const FormEditUser = ({id, name, lastname, email}) => {
           />
         </label>
         <p className="text-red-600 my-0 text-center">{errors.email?.message}</p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div>
+          <div className="join w-full">
+            <label
+              className="input input-bordered flex items-center gap-2 join-item w-full"
+              data-theme="light"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="w-4 h-4 opacity-70"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="grow"
+                placeholder="Contraseña"
+                name="password"
+                {...register("password")}
+                minLength={8}
+                maxLength={16}
+              />
+            </label>
+            <span
+              className={
+                showPassword
+                  ? "input-group-text btn btn-danger join-item"
+                  : "input-group-text btn btn-outline-danger join-item"
+              }
+              onClick={() => setShowPassword(!showPassword)}
+              style={{ cursor: "pointer" }}
+            >
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </span>
+          </div>
+          <p className="text-sm text-gray-400 text-wrap">
+            La contraseña debe tener entre 8 y 16 caracteres,una mayúscula y un
+            número
+          </p>
+          <p className="text-red-600 my-0 text-center">
+            {errors.password?.message}
+          </p>
+        </div>
+        <div>
+          <div className="join w-full">
+            <label
+              className="input input-bordered flex items-center gap-2 join-item w-full"
+              data-theme="light"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="w-4 h-4 opacity-70"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="grow"
+                placeholder="Repetir contraseña"
+                name="repassword"
+                minLength={8}
+                maxLength={16}
+                {...register("repassword")}
+              />
+            </label>
+            <span
+              className={
+                showPassword
+                  ? "input-group-text btn btn-danger join-item"
+                  : "input-group-text btn btn-outline-danger join-item"
+              }
+              onClick={() => setShowPassword(!showPassword)}
+              style={{ cursor: "pointer" }}
+            >
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </span>
+          </div>
+          <p className="text-red-600 my-0 text-center">
+            {errors.repassword?.message}
+          </p>
+        </div>
       </div>
       {loading ? (
         <div className="flex mt-3 justify-center mt-4 mb-3">

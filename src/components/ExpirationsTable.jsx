@@ -12,12 +12,15 @@ import { FaPencilAlt } from "react-icons/fa";
 import moment from 'moment';
 import FormEditExpiration from './FormEditExpiration';
 import FormEditCicle from './FormEditCicle';
+import ActionButton from './ActionButton';
 
 
 
 const ExpirationsTable = ({members}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMembers, setFilteredMembers] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
     const [pending, setPending] = useState(true)
     const dispatch = useDispatch()
     const estado = useSelector(state => state.members)
@@ -155,19 +158,65 @@ const ExpirationsTable = ({members}) => {
         selectAllRowsItemText: 'Todos',
     };
 
+    const handleStartDateChange = (date) => {
+      setStartDate(date);
+    };
+    
+    const handleEndDateChange = (date) => {
+      setEndDate(date);
+    };
+  
+    const handleSearchDate = () => {
+      setFilteredMembers(
+        members.filter((member) => {
+          const paymentDate = moment(member.proximo_vencimiento);
+          return (
+            (!startDate || paymentDate.isSameOrAfter(startDate, 'day')) &&
+            (!endDate || paymentDate.isSameOrBefore(endDate, 'day')) &&
+            member.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        })
+      );
+    };
 
   return (
     <div className='w-full overflow-x-auto mb-10 rounded-lg shadow-md p-7 bg-white' data-theme='light'>
-      <div className='flex w-full'>
-
-                        <input
+      <div className='flex w-full items-end gap-2 justify-between mb-10'>
+            <input
                 type="text"
                 placeholder="Buscar por nombre o apellido o programa"
                 value={searchTerm}
                 onChange={handleSearch}
-                className="input input-bordered mb-5 w-[60%]"
-                
-            />
+                className="input input-bordered w-[40%]"
+              />
+            <div className="flex gap-2 w-50 items-end">
+          <div className="w-50">
+            <p>Desde</p>
+            <label className="input input-bordered flex items-center gap-2" data-theme="light">
+              <input
+                type="date"
+                className="w-full"
+                placeholder="Fecha de inicio"
+                value={startDate}
+                onChange={(e) => handleStartDateChange(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div className="w-50">
+          <p>Hasta</p>
+            <label className="input input-bordered flex items-center gap-2" data-theme="light">
+              <input
+                type="date"
+                className="w-full"
+                placeholder="Fecha de fin"
+                value={endDate}
+                onChange={(e) => handleEndDateChange(e.target.value)}
+              />
+            </label>
+          </div>
+            <ActionButton accion={handleSearchDate} value="Filtrar Vencimiento" />
+        </div>
       </div>
       {estado.isLoading ? 
       (

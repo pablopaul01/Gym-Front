@@ -142,6 +142,7 @@ const FormCreateUser = () => {
                 {...register("password")}
                 minLength={8}
                 maxLength={16}
+                required
               />
             </label>
             <span
@@ -156,8 +157,8 @@ const FormCreateUser = () => {
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </span>
           </div>
-          <p className="text-sm text-gray-400">
-            La contraseña debe tener entre 8 y 16 caracteres,una mayúscula y un
+          <p className="text-sm text-gray-400 text-wrap">
+          La contraseña debe tener entre 8 y 16 caracteres,una mayúscula y un
             número
           </p>
           <p className="text-red-600 my-0 text-center">
@@ -189,6 +190,7 @@ const FormCreateUser = () => {
                 name="repassword"
                 minLength={8}
                 maxLength={16}
+                required
                 {...register("repassword")}
               />
             </label>
