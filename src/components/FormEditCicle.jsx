@@ -62,7 +62,7 @@ const FormEditCicle = ({id, vencimiento}) => {
             <input
               type="date"
               className="w-full"
-              defaultValue={moment.utc(vencimiento).format("YYYY-MM-DD")}
+              defaultValue={moment(vencimiento).format("YYYY-MM-DD")}
               placeholder='Fecha de vencimiento'
               name="inicioCiclo"
               {...register("inicioCiclo")}

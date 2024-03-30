@@ -12,6 +12,11 @@ const initialState = {
   totalAlumnos: 0,
   alumnosConVencimientoMayor: 0,
   alumnosActivosProximoVencimiento: 0,
+  cantidadAlumnosVencidosEnMesActual: 0,
+  alumnosPorPrograma:[],
+  alumnosActivosPorPrograma:[],
+  alumnosVencidosPorPrograma: [],
+  alumnosVencidosMesActualPorPrograma:[],
   isLoading: false,
   isError: false,
 };
@@ -31,6 +36,11 @@ const alumnosStatsSlice = createSlice({
         state.totalAlumnos = action.payload.totalAlumnos;
         state.alumnosConVencimientoMayor = action.payload.alumnosConVencimientoMayor;
         state.alumnosActivosProximoVencimiento = action.payload.alumnosActivosProximoVencimiento;
+        state.cantidadAlumnosVencidosEnMesActual = action.payload.cantidadAlumnosVencidosEnMesActual;
+        state.alumnosPorPrograma = action.payload.alumnosPorPrograma;
+        state.alumnosActivosPorPrograma = action.payload.alumnosActivosPorPrograma;
+        state.alumnosVencidosPorPrograma = action.payload.alumnosVencidosPorPrograma;
+        state.alumnosVencidosMesActualPorPrograma = action.payload.alumnosVencidosMesActualPorPrograma
       })
       .addCase(getAlumnosStats.rejected, (state) => {
         state.isLoading = false;
