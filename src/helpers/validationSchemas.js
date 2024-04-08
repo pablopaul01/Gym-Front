@@ -73,8 +73,7 @@ export const REGISTRO_SCHEMA = yup.object({
     fecha: yup.date()
     .transform((value, originalValue) => originalValue ? value : null)
     .max(new Date(), "La fecha no puede ser mayor a la fecha actual")
-    .nullable()
-    .required('Debe elegir una fecha'),
+    .nullable(),
     //monto es un string pero que solo admite numeros y no puede ser menor a 0
     monto: yup.string().matches(/^\d+(\.\d{1,2})?$/, "Solo se admiten números y un máximo de 2 decimales").required("El monto es requerido"),
   })

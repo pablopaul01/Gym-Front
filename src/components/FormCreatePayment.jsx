@@ -10,6 +10,7 @@ import { RiBankFill } from "react-icons/ri";
 import moment from 'moment'
 import { getPayments } from '../store/PaymentsSlice'
 import { REGISTERPAYMENT_SCHEMA } from '../helpers/validationSchemas'
+import { getMembers } from '../store/MemberSlice'
 
 const FormCreatePayment = ({id}) => {
     const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ const FormCreatePayment = ({id}) => {
           })
             toast.success("Pago cargado correctamente!",{position:"top-right"});
             dispatch(getPayments())
+            dispatch(getMembers())
         } catch (error) {
             console.log(error)
             toast.error("Ocurroió un problema! Intentelo más tarde.",{position:"top-right"})

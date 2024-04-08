@@ -85,6 +85,7 @@ const FormMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa, pr
             data-theme="light"
           >
             <CgGym className="w-7 h-7 opacity-70" size={25}/>
+            {console.log("programa", programa)}
             <input
               type="text"
               className="grow w-full"

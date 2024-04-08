@@ -94,7 +94,7 @@ const MembersTable = () => {
                         >
                             <div className='flex flex-col gap-5'>
                             <h3 className='font-bold text-lg'>Ficha del Alumno - {row.name} {row.lastname}</h3>
-                            <FormMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} programa={row.programa} proximo_vencimiento={row.proximo_vencimiento} inicioCiclo={row.fecha_inicio_ciclo} 
+                            <FormMember id={row._id} name={row.name} lastname={row.lastname} dni={row.dni} whatsapp={row.whatsapp} obraSocial={row.obraSocial} programa={row.clases?.name} proximo_vencimiento={row.proximo_vencimiento} inicioCiclo={row.fecha_inicio_ciclo} 
                             ultimoPago={row?.pagos[row?.pagos.length-1]?.fecha_de_pago} 
                             medioPago={row?.pagos[row?.pagos.length-1]?.medio_de_pago} 
                             montoPago={row?.pagos[row?.pagos.length-1]?.monto} 
