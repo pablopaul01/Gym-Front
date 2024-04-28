@@ -97,7 +97,6 @@ const FormCreateMember = () => {
             type="number"
             className="grow"
             placeholder="DNI"
-            required
             name="dni"
             {...register("dni")}
             maxLength={40}
@@ -142,7 +141,6 @@ const FormCreateMember = () => {
             className="grow"
             placeholder="Obra social"
             name="obraSocial"
-            required
             {...register("obraSocial")}
             maxLength={40}
           />

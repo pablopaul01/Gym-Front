@@ -114,7 +114,6 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
               {...register("dni")}
               maxLength={40}
               min={0}
-              required
             />
           </label>
           {
@@ -159,7 +158,6 @@ const FormEditMember = ({id, name, lastname, dni, whatsapp, obraSocial, programa
               className="grow w-full"
               placeholder="Obra social"
               defaultValue={obraSocial}
-              required
               name="obraSocial"
               {...register("obraSocial")}
               maxLength={40}

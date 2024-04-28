@@ -31,8 +31,7 @@ export const REGISTRO_SCHEMA = yup.object({
     .matches(/^\d+$/, "El DNI debe contener solo números")
     .min(7, "El DNI debe tener al menos 7 dígitos")
     .max(8, "El DNI no puede tener más de 8 dígitos")
-    .test('positive', 'El DNI no puede ser negativo', value => parseInt(value, 10) >= 0)
-    .required("El DNI es requerido"),
+    .test('positive', 'El DNI no puede ser negativo', value => parseInt(value, 10) >= 0),
     whatsapp: yup.string().matches(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, { 
       message: "El número no es válido",
       excludeEmptyString: true,
@@ -49,8 +48,7 @@ export const REGISTRO_SCHEMA = yup.object({
     .matches(/^\d+$/, "El DNI debe contener solo números")
     .min(7, "El DNI debe tener al menos 7 dígitos")
     .max(8, "El DNI no puede tener más de 8 dígitos")
-    .test('positive', 'El DNI no puede ser negativo', value => parseInt(value, 10) >= 0)
-    .required("El DNI es requerido"),
+    .test('positive', 'El DNI no puede ser negativo', value => parseInt(value, 10) >= 0),
     whatsapp: yup.string().matches(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, { 
       message: "El número no es válido",
       excludeEmptyString: true,
